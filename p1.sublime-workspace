@@ -1,0 +1,735 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"default",
+				"defaultUrl"
+			],
+			[
+				"in",
+				"initInjector"
+			],
+			[
+				"template",
+				"templateCache"
+			],
+			[
+				"xyz",
+				"xyzPhoneData"
+			],
+			[
+				"phonec",
+				"phonecatApp"
+			],
+			[
+				"index",
+				"indexOfDecimal"
+			],
+			[
+				"output",
+				"output_style"
+			],
+			[
+				"_m",
+				"_mInitilized"
+			],
+			[
+				"obj",
+				"windowObj"
+			],
+			[
+				"window",
+				"windowObj"
+			],
+			[
+				"win",
+				"windowObj"
+			],
+			[
+				"reset",
+				"resetDescHeights"
+			],
+			[
+				"con",
+				"contructor"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"sk",
+				"skillsVisible"
+			],
+			[
+				"skill",
+				"skillsInit"
+			],
+			[
+				"skil",
+				"skillsInit"
+			],
+			[
+				"config",
+				"configSkills"
+			],
+			[
+				"toggle",
+				"toggleVideo"
+			],
+			[
+				"fad",
+				"fadeNavBG"
+			],
+			[
+				"san",
+				"sansumi"
+			],
+			[
+				"is",
+				"isMobile"
+			],
+			[
+				"pro",
+				"projectAnimation"
+			],
+			[
+				"project",
+				"projectAnimation"
+			],
+			[
+				"projec",
+				"projectDescHeights"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/index.html",
+			"settings":
+			{
+				"buffer_size": 1963,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/css/sass/app.scss",
+			"settings":
+			{
+				"buffer_size": 182,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/css/sass/_phone.scss",
+			"settings":
+			{
+				"buffer_size": 191,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/css/sass/_desktop.scss",
+			"settings":
+			{
+				"buffer_size": 131,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app.js",
+			"settings":
+			{
+				"buffer_size": 1934,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/controllers.js",
+			"settings":
+			{
+				"buffer_size": 417,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/css/sass/_tablet.scss",
+			"settings":
+			{
+				"buffer_size": 34,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/css/sass/_base.scss",
+			"settings":
+			{
+				"buffer_size": 32,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/partials/partial1.phone.html",
+			"settings":
+			{
+				"buffer_size": 72,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/partials/partial1.html",
+			"settings":
+			{
+				"buffer_size": 43,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 127.0,
+		"selected_items":
+		[
+			[
+				"scss",
+				"Set Syntax: CSS"
+			],
+			[
+				"package control: Install Package",
+				"Package Control: Install Package"
+			],
+			[
+				"package control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"jav",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 146.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Airik Farley/Dropbox/P1/app/partials/partial1.html",
+		"/C/Users/Airik Farley/Dropbox/P1/app/css/sass/_base.scss",
+		"/C/Users/Airik Farley/Dropbox/P1/app/css/sass/_menu.scss",
+		"/C/Users/Airik Farley/codeExamples/files/pricing.js",
+		"/C/Users/Airik Farley/Dropbox/P1/app/css/sass/_tablet.scss",
+		"/C/Users/Airik Farley/Dropbox/P1/app/css/sass/phone.scss",
+		"/C/Users/Airik Farley/Dropbox/P1/app/css/sass/tablet.scss",
+		"/C/Users/Airik Farley/Dropbox/P1/app/css/phone.css",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/index.html",
+		"/C/Users/Airik Farley/Dropbox/P1/bower.json",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/bower.json",
+		"/C/Users/Airik Farley/Dropbox/P1/app/css/sass/_desktop.scss",
+		"/C/Users/Airik Farley/Dropbox/P1/app/config.rb",
+		"/C/Users/Airik Farley/Dropbox/P1/app/sass/_desktop.scss",
+		"/C/Users/Airik Farley/Dropbox/P1/app/sass/app.scss",
+		"/C/Users/Airik Farley/Dropbox/P1/app/css/app.css",
+		"/C/Users/Airik Farley/Dropbox/P1/app/css/screen.css",
+		"/C/Users/Airik Farley/Dropbox/P1/app/index-async.html",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/js/filters.js",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/test/karma.conf.js",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/js/services.js",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/test/e2e/scenarios.js",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/test/unit/controllersSpec.js",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/js/controllers.js",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/css/app.css",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/js/app.js",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/test/unit/filtersSpec.js",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/partials/phone-detail.html",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/css/animations.css",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/partials/phone-list.html",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/js/animations.js",
+		"/C/Users/Airik Farley/Dropbox/angular-phonecat/app/phones/phones.json",
+		"/C/Users/Airik Farley/Dropbox/P1/sass/base.scss",
+		"/C/Users/Airik Farley/Dropbox/P1/config.rb",
+		"/C/Users/Airik Farley/Dropbox/P1/index.html",
+		"/C/Users/Airik Farley/Dropbox/P1/sass/vendor/bootstrap.scss",
+		"/C/Users/Airik Farley/Dropbox/P1/sass/screen.scss",
+		"/C/Users/Airik Farley/Dropbox/P1/css/screen.css",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/.htaccess",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/js/main.min.js",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/js/main.js",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/sass/_jpreloader.scss",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/sass/main.001.scss",
+		"/C/Users/Airik Farley/Desktop/unitEmblem.svg",
+		"/C/Users/Airik Farley/Desktop/Untitled-1.html",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/index.html",
+		"/C/Users/Airik Farley/Dropbox/P1/sass/config.rb",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/sass/main.scss",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/main.css",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/css/main.css",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/config.rb",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/js/main_old.js",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/js/main_oop.js",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/js/controllers.js",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/test.html",
+		"/C/Users/Airik Farley/Documents/GitHub/codeExamples/application.js",
+		"/C/Users/Airik Farley/Documents/GitHub/codeExamples/pricing.js",
+		"/C/Users/Airik Farley/Documents/GitHub/codeExamples/jQuery/techEd-Australia-EMO.htm",
+		"/C/Users/Airik Farley/Documents/GitHub/codeExamples/main.js",
+		"/C/Users/Airik Farley/Documents/GitHub/codeExamples/index.html",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/sass/_bootstrap.scss",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/sass/_base.scss",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/js/vendor/jquery.inviewport.min.js",
+		"/C/Users/Airik Farley/Desktop/jpreloader-v2/jpreloader-v2/index.html",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/sendEmail.php",
+		"/C/Users/Airik Farley/Dropbox/Portfolio/sass/_fonts.scss",
+		"/C/Users/Airik Farley/Desktop/jpreloader-v2/jpreloader-v2/css/jpreloader.css",
+		"/C/Users/Airik Farley/Dropbox/Portfolio_current/contact.php",
+		"/C/Users/Airik Farley/Dropbox/Portfolio_current/common.php",
+		"/C/Users/Airik Farley/Dropbox/Portfolio_current/functions.php",
+		"/C/Users/Airik Farley/Dropbox/Portfolio_current/index.php"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"partial1.desktop",
+			"myApp",
+			"sprint",
+			"phonecatAnimations",
+			"+",
+			"hasDecimal",
+			"a.active",
+			"active",
+			"rewrite",
+			"bg-blue",
+			"bg-accent",
+			"bg-grey",
+			"bg-blue",
+			"visible",
+			";\n",
+			"console",
+			"alert",
+			"filter",
+			"alert",
+			"auto",
+			"$wrapper",
+			"alert",
+			"isMobile",
+			"tablet",
+			"isMobile",
+			"inviewport",
+			"navigator",
+			"body",
+			"html",
+			"body",
+			"scrollTop",
+			"3d",
+			"translate",
+			"show",
+			"hide",
+			"window",
+			"body",
+			"draw",
+			"return",
+			"logo",
+			"header\n",
+			";\n",
+			"a{",
+			"projectAnimationConfig",
+			"\"},\n"
+		],
+		"highlight": false,
+		"in_selection": true,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"indexOfDecimal",
+			"blue",
+			"accent",
+			"grey",
+			"blue",
+			"wrapper"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 8,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/index.html",
+					"settings":
+					{
+						"buffer_size": 1963,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1168,
+								1168
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 36.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/css/sass/app.scss",
+					"settings":
+					{
+						"buffer_size": 182,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								182,
+								182
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/css/sass/_phone.scss",
+					"settings":
+					{
+						"buffer_size": 191,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								175,
+								175
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
+							"tab_size": 2
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/css/sass/_desktop.scss",
+					"settings":
+					{
+						"buffer_size": 131,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								122,
+								122
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
+							"tab_size": 2
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/js/app.js",
+					"settings":
+					{
+						"buffer_size": 1934,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1059,
+								1059
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 126.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/js/controllers.js",
+					"settings":
+					{
+						"buffer_size": 417,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								342,
+								342
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/css/sass/_tablet.scss",
+					"settings":
+					{
+						"buffer_size": 34,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								34,
+								34
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
+							"tab_size": 2
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/css/sass/_base.scss",
+					"settings":
+					{
+						"buffer_size": 32,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								32,
+								32
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/partials/partial1.phone.html",
+					"settings":
+					{
+						"buffer_size": 72,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11,
+								11
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/partials/partial1.html",
+					"settings":
+					{
+						"buffer_size": 43,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								43,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 221.0,
+	"status_bar_visible": true
+}
