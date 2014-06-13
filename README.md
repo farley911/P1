@@ -4,6 +4,8 @@ P1 is an event management platform I am developing targeted at the buisness need
 # Envoirment Setup
 Install Ruby Installer (http://rubyinstaller.org/)
 
+Install Node.js (http://nodejs.org/download/)
+
 Install Compass (http://compass-style.org/install/)
 
 Install Sass (http://sass-lang.com/install)

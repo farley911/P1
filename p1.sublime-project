@@ -2,7 +2,8 @@
 	"folders":
 	[
 		{
-			"path": "app"
+			"follow_symlinks": true,
+			"path": "."
 		}
 	]
 }

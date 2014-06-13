@@ -8,13 +8,13 @@ describe('controllers', function(){
 
   it('should ....', inject(function($controller) {
     //spec body
-    var myCtrl1 = $controller('MyCtrl1', { $scope: {} });
-    expect(myCtrl1).toBeDefined();
+    var partial1Ctrl = $controller('Partial1Ctrl', { $scope: {} });
+    expect(partial1Ctrl).toBeDefined();
   }));
 
   it('should ....', inject(function($controller) {
     //spec body
-    var myCtrl2 = $controller('MyCtrl2', { $scope: {} });
-    expect(myCtrl2).toBeDefined();
+    var partial2Ctrl = $controller('Partial2Ctrl', { $scope: {} });
+    expect(partial2Ctrl).toBeDefined();
   }));
 });
