@@ -19,3 +19,5 @@ Complete the setup steps from the Angular tutorial (https://docs.angularjs.org/t
 I used the angular seed project for the base of this application. Some useful information can be found in the readme. (https://github.com/angular/angular-seed)
 
 I am using travis CI for my CI (http://docs.travis-ci.com/user/getting-started/)
+
+I had an issue when I ran protractor that said matcherfn_ was undefined. I fixed it using this: (http://stackoverflow.com/questions/24217987/end-to-end-testing-with-protractor-giving-error)
