@@ -3,8 +3,8 @@
 server/sessions/*
 node_modules/*
 public/.sass-cache/*
-P1.sublime-project
-P1.sublime-workspace
+/P1.sublime-project
+/P1.sublime-workspace
 npm-debug.log
 tests/coverage/**
 designs/*
