@@ -1,0 +1,90 @@
+// Needed for angular twitter bootstrap
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+// Fix for angular ng-cloak
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+body{
+  @extend .roboto;
+  font-size: 20px;
+  padding-top: 70px; // needed to account for the fixed top navbar
+}
+form{
+  input.ng-dirty.ng-invalid{
+    background-color: #ffccd8;
+    border-color: red;
+  }
+}
+h1, h2, h3, h4, h5, h6, strong {
+  @extend .roboto-bold;
+}
+h2 {
+  border-bottom: 1px solid $lt-grey;
+  font-size: 26px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  text-transform: capitalize;
+}
+label {
+  @extend .roboto-bold;
+}
+.navbar-brand {
+  @extend .roboto-bold;
+  font-size: 20px;
+}
+.navbar-nav>li>a {
+  font-size: 18px;
+}
+.content-wrapper{
+  margin: 0 auto;
+  width: 1200px;
+}
+.btn {
+  font-size: 16px;
+  text-transform: capitalize;
+}
+.modal-content{
+  padding: 20px;
+
+  button.close{
+    position: absolute;
+    right: 20px;
+    z-index: 100;
+  }
+}
+.modal-wrapper.login {
+  padding: 15px;
+
+  .errMsg{
+    @extend .roboto-bold;
+    color: $red;
+    background-color: $lt-red;
+    border: 1px solid $red;
+    padding: 10px 20px;
+    @include border-radius(5px);
+  }
+  .fb-btn{
+    background-color: $fb-blue;
+    color: white;
+    font-weight: bold;
+  }
+}
+.center-text {
+  text-align: center;
+}
+.left-align {
+text-align: left;
+}
+.justify-text {
+  text-align: justify;
+}
+.lesson-controls {
+  margin-top: 30px;
+  text-align: right;
+}
+.error{
+  @extend .roboto-bold;
+	color: $red;
+}

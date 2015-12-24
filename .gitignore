@@ -1,7 +1,12 @@
-logs/*
-!.gitkeep
-node_modules/
-bower_components/
-tmp
-.DS_Store
-.idea
+# Ignore configuration files that may contain sensitive information.
+
+server/sessions/*
+node_modules/*
+public/.sass-cache/*
+P1.sublime-project
+P1.sublime-workspace
+npm-debug.log
+tests/coverage/**
+designs/*
+tests/error.log
+tests/karma_html/**

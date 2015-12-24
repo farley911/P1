@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='P1'>
+	<head>
+		<meta charset='utf-8'>
+		<meta name='viewport' content='width=device-width initial-scale=1 maximum-scale=1 user-scalable=no'>
+		<base href='/'>
+		
+		<!-- required javascriot -->
+		<script src='/js/lib/angular/angular.js'></script>
+		<script src='/js/lib/angular/angular-ui-router.js'></script>
+		<script src='/js/angularApp.js'></script>
+		<script src='/js/lib/ui-bootstrap-tpls-0.12.0.min.js'></script>
+		<script src='/js/lib/jquery-2.1.4.min.js'></script>
+		<script src='/js/lib/angular/angular-messages.js'></script>		
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+
+		<!-- application module -->
+		<script src='/modules/app.module.js'></script>
+
+		<!-- authentication module -->
+		<script src='/modules/auth/auth.module.js'></script>
+		<script src='/modules/auth/auth.ctrl.js'></script>
+		<script src='/modules/auth/auth.factory.js'></script>
+		<script src='/modules/auth/auth.routes.js'></script>
+		<script src='/modules/auth/forgotPassword.directive.js'></script>
+		<script src='/modules/auth/login.factory.js'></script>
+
+		<!-- core module -->
+		<script src='/modules/core/core.module.js'></script>
+		<script src='/modules/core/compareTo.directive.js'></script>
+		<script src='/modules/core/sessionStorage.factory.js'></script>
+		<script src='/modules/core/audioPlayer.directive.js'></script>
+
+		<!-- home module -->
+		<script src='/modules/home/home.module.js'></script>
+		<script src='/modules/home/home.routes.js'></script>
+
+		<!-- register module -->
+		<script src='/modules/registration/registration.module.js'></script>
+		<script src='/modules/registration/registration.ctrl.js'></script>
+		<script src='/modules/registration/registration.factory.js'></script>
+		<script src='/modules/registration/registration.routes.js'></script>
+
+		<!-- user module -->
+		<script src='/modules/user/user.module.js'></script>
+		<script src='/modules/user/user.ctrl.js'></script>
+		<script src='/modules/user/user.factory.js'></script>
+		<script src='/modules/user/user.routes.js'></script>
+
+		<title>P1 Boilerplate {{pageTitle}}</title>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:300,300italic,500' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+		<link rel='stylesheet' href='/css/app.css'>
+	</head>
+	<body>
+		<div class='content-wrapper'>
+			<nav class='navbar navbar-default navbar-fixed-top' ng-controller='Auth as auth' ng-cloak>
+				<div class='container'>
+					<a class='navbar-brand' href=''>P1 Boilerplate</a>
+					<ul class='nav navbar-nav navbar-right'>
+						<li>
+							<a ng-href="/">Home</a>
+						</li>
+						<li>
+							<a ng-href='/user' ng-show='auth.factory.isLoggedIn'>User Profile</a>
+						</li>
+						<li>
+							<a ng-href='/register' ng-hide='auth.factory.isLoggedIn'>Register</a>
+						</li>
+						<li>
+							<a ng-click='auth.openLoginModal()' ng-hide='auth.factory.isLoggedIn'>Login</a>
+						</li>
+						<li>
+							<a ng-click='auth.logout()' ng-show='auth.factory.isLoggedIn'>Logout</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<div class='container'>
+				<ui-view></ui-view>
+			</div>
+		</div>
+	</body>
+</html>

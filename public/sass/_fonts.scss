@@ -1,0 +1,11 @@
+.handlee {
+  font-family: 'Handlee', cursive;
+}
+.roboto {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+.roboto-bold {
+  @extend .roboto;
+  font-weight: 500;
+}

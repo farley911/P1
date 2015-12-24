@@ -1,0 +1,66 @@
+<h3>Register a user</h3>
+<div class='container'>
+	<div class='row' ng-show='hasFlash'>
+		<div class='col-xs-10 col-xs-offset-1'>
+			<h4>{{reg.flash}}</h4>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col-xs-12'>
+			<form ng-submit='reg.register()' name='reg.regForm'>
+				<div class='form-group'>
+					<label for='username'>Username:</label>
+					<input class='form-control' name='username' ng-model='reg.user.username' required ng-blur='reg.checkUsername()' />
+					<div ng-messages='reg.regForm.username.$error' ng-if='reg.regForm.username.$dirty'>						
+						<div class='error' ng-message='usernameTaken'>This username is already taken, please try another.</div>
+						<div class='error' ng-message='required'>You must enter a username</div>
+					</div>
+				</div>
+				<div class='form-group'>
+					<label for='email'>Email:</label>
+					<input class='form-control' name='email' ng-model='reg.user.email' required type='email' ng-blur='reg.alreadyRegistered()' />
+					<div ng-messages='reg.regForm.email.$error' ng-if='reg.regForm.email.$dirty'>						
+						<div ng-message='userExists' ng-controller='Auth as auth'>
+							<span class='error'>This user already exists. <a href='#' ng-click='auth.forgotPassword(reg.user.email)' title='Forgot password'>Forgot password?</a></span>
+							<forgot-password-directive></forgot-password-directive>
+						</div>
+						<div class='error' ng-message='required'>You must enter an e-mail address.</div>
+						<div class='error' ng-message='email'>The e-mail you entered does not appear to be a valid e-mail address.</div>
+					</div>
+				</div>
+				<div class='form-group'>
+					<label for='password'>Password:</label>
+					<input class='form-control' name='password' type='password' ng-model='reg.user.password' required id='password' />
+					<div ng-messages='reg.regForm.password.$error' ng-if='reg.regForm.password.$dirty'>
+						<div class='error' ng-message='required'>You must enter a password.</div>
+					</div>
+				</div>
+				<div class='form-group'>
+					<label for='c_password'>Confirm Password:</label>
+					<input class='form-control' name='c_password' type='password' ng-model='reg.user.c_password' required aly-compare-to='reg.user.password' />
+					<div ng-messages='reg.regForm.c_password.$error' ng-if='reg.regForm.c_password.$dirty'>
+						<div class='error' ng-message='required'>You must enter a password.</div>
+						<div class='error' ng-message='alyCompareTo'>Your passwords do not match.</div>
+					</div>
+				</div>
+				<div class='form-group'>
+					<label for='first_name'>First Name:</label>
+					<input class='form-control' name='first_name' ng-model='reg.user.first_name' required />
+					<div ng-messages='reg.regForm.first_name.$error' ng-if='reg.regForm.first_name.$dirty'>
+						<div class='error' ng-message='required'>Tell us your first name so we know what to call you.</div>
+					</div>
+				</div>
+				<div class='form-group'>
+					<label for='last_name'>Last Name:</label>
+					<input class='form-control' name='last_name' ng-model='reg.user.last_name' required />
+					<div ng-messages='reg.regForm.last_name.$error' ng-if='reg.regForm.last_name.$dirty'>
+						<div class='error' ng-message='required'>Tell us your last name so we know what to call you.</div>
+					</div>
+				</div>
+				<div class='form-group'>
+					<button class='btn btn-primary' type='submit' ng-disabled='reg.regForm.$invalid'>Register</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
