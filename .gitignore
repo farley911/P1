@@ -1,12 +1,12 @@
 # Ignore configuration files that may contain sensitive information.
 
-server/sessions/*
-node_modules/*
-public/.sass-cache/*
+/server/sessions/*
+/node_modules/*
+/public/.sass-cache/*
 /P1.sublime-project
 /P1.sublime-workspace
-npm-debug.log
-tests/coverage/**
-designs/*
-tests/error.log
-tests/karma_html/**
+/npm-debug.log
+/tests/coverage/**
+/designs/*
+/tests/error.log
+/tests/karma_html/**
