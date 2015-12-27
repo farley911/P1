@@ -33,12 +33,13 @@
     function register(user){
       return $http.post('register', registration.user)
         .then(function(data){
+          /* istanbul ignore else*/
           if(data.status === 200){
             authFactory.isLoggedIn = true;
           }
         })
         .catch(function(err) {
-          registration.error = err;
+          registration.error = err.data;
         });
     }
 

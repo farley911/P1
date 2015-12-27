@@ -29,7 +29,7 @@ app.set('views', __dirname + '/public');
 app.engine('.html', require('ejs').renderFile);
 app.use(morgan('dev'));
 app.use(methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: (365 * 24 * 60 * 60 * 1000) /* One year */ }));
 app.use(cookieParser(secret));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
