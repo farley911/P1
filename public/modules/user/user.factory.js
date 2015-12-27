@@ -25,7 +25,6 @@
       user.getUser()
         .then(function(currentUser) {
           user.data.name = currentUser.first_name + ' ' + currentUser.last_name;
-          console.log(user.data);
         });
     }
 

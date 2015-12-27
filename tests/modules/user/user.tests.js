@@ -1,7 +1,7 @@
 'use strict'
 
 describe('User Controller Tests', function () {
-	var $controller, $scope, defer, userFactory, getUserSpy, User;
+	var $controller, $scope, defer, userFactory, activateSpy, getUserSpy, User;
 
 	beforeEach(module('P1'));
 
@@ -11,9 +11,11 @@ describe('User Controller Tests', function () {
     defer = $q.defer();
 
     // Create spies
+    activateSpy = jasmine.createSpy('activate').and.returnValue(defer.promise);
 		getUserSpy = jasmine.createSpy('getUser').and.returnValue(defer.promise);
 
 		userFactory = {
+      activate: activateSpy,
 			getUser: getUserSpy
 		};
 
@@ -32,11 +34,7 @@ describe('User Controller Tests', function () {
     $scope.$apply();
 	}));
 
-	it('should have User.name equal to Bruce Wayne', function () {
-		expect(User.name).toEqual('Bruce Wayne');
-	});
-
-  it('should call userFactory.getUser()', function() {
-    expect(userFactory.getUser).toHaveBeenCalled();
+  it('should call userFactory.activate()', function() {
+    expect(userFactory.activate).toHaveBeenCalled();
   });
 });
