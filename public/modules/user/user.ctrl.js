@@ -8,9 +8,11 @@
   User.$inject = ['userFactory'];
 
   function User(userFactory) {
+    // Properties
     var user = this;
     user.factory = userFactory;
 
+    // Methods
     userFactory.activate();
   }
 })();
