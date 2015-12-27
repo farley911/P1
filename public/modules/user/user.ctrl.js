@@ -9,10 +9,8 @@
 
   function User(userFactory) {
     var user = this;
+    user.factory = userFactory;
 
-    userFactory.getUser()
-      .then(function(currentUser) {
-        user.name = currentUser.first_name + ' ' + currentUser.last_name;
-      })
+    userFactory.activate();
   }
 })();
