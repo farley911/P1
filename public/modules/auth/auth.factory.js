@@ -64,15 +64,13 @@
     function forgotPassword(email) {
       var defered = $q.defer();
 
-      $http({
-        method: 'POST',
-        url: '/forgotPassword.php',
-        data: $.param(email),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      })
-      .success(function (data) {
-        defered.resolve(data);
-      });
+      $http.post('forgotPassword', email)
+        .then(function (data) {
+          defered.resolve(data);
+        })
+        .catch(function (err) {
+          defered.reject(err);
+        });
 
       return defered.promise;
     }

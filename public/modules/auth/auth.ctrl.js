@@ -46,9 +46,17 @@
 
     function forgotPassword(email) {
       if(email) {
+        auth.resetPassword.feedback = '';
+        auth.resetPassword.error = '';
         authFactory.forgotPassword({ email: email })
-          .then(function(res) {
-            auth.resetPassword.feedback = res.message;
+          .then(function (res) {
+            console.log('res', res.data.message);
+            auth.resetPassword.feedback = res.data.message;
+            $('#forgotPassword').modal();
+          })
+          .catch(function (err) {
+            console.log('err', err.data.message);
+            auth.resetPassword.error = err.data.message;
             $('#forgotPassword').modal();
           });
       }
@@ -56,7 +64,7 @@
     
     function updatePassword() {
       authFactory.updatePassword(auth.resetPassword)
-        .then(function(res) {
+        .then(function (res) {
           auth.user = res.data;
           auth.login();
         });

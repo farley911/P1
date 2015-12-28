@@ -2,14 +2,34 @@
 var passport = require('passport');
 var secret = process.env.SESSION_SECRET;
 var crypto = require('../../crypto');
+var fs = require('fs');
 var models = require('../../models');
 var User = models.User;
+var core = require('./core');
+var forgotPasswordTemplate = require('../../email_templates/forgotPassword');
 
 require('../../passport');
 
+exports.forgotPassword = function(req, res) {
+  core
+    .sendMail(
+      req.body.email, 
+      'eric@ericfarley.net', 
+      'Password Reset Instructions', 
+      template.generateHTML(req.body.email),
+      function (err, responseStatus) {
+        if(!responseStatus) {
+          return res.status(401).json({ err: err, message: 'Sorry but there appears to have been an error sending your email.' });  
+        } else {
+          return res.status(200).json({ message: 'Password reset instructions have been successfully emailed to your email address.' });
+        }
+      }
+    );
+}
+
 // Log a local user into the application using passport
 exports.login = function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local', function (err, user, info) {
     if(err) { return next(err); }
 
     if(user) {
@@ -40,18 +60,6 @@ exports.login = function(req, res, next) {
     }
   })(req, res, next);  
 }
-
-exports.ldapLogin = function(req, res, next) {
-  passport.authenticate('ldapauth', function(err, user, info) {
-    if(err) { return next(err); }
-
-    if(user) {
-      return res.json({ token: user.generateJWT(secret) });
-    } else {
-      return res.status(401).json(info);
-    }
-  })(req, res, next);
-};
 
 exports.logout = function(req, res) {
   req.logout();

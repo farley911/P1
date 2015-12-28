@@ -37,6 +37,9 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	SESSION_SECRET -> use any long nonsensical sentence. i.e. 'The green card climbed robin hood's luggage and found a purple sun eating some BBQ; Bazinga he exclaimed!'
 	NODE_ENV -> use either 'development', 'ppmo' or 'production'
 	AES_KEY -> This can be anything for development however you need to use the same key every time or you will get different values for encrypted items later when the key changes. For production enviorments (ppmo & prod) use a long base64 encrypted string so it's computationally expensive to brute force crack.
+	SMTP_HOST -> a valid SMTP host address i.e. some.host.com
+	SMTP_USER -> SMTP host username
+	SMTP_PASS -> SMTP host password
 	
 ### Running the app
 
@@ -66,10 +69,53 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	
 	TIP: You will see a folder with the coverage results for each browser being monitored, denoted by '**' in the path above.
 	
-### Receiving updates from upstream
-
-Just fetch the changes and merge them into your project with git.
-
+### Sending Emails from the application
+	
+	The application uses nodemailer to send SMTP emails. To send emails you must first set the enviornment variables for SMTP_HOST (host address), SMTP_USER (username), and SMTP_PASS (password). These variables will be uniuqe to the email server you are using.
+	
+	Once nodemailer has been configured you can send emails by following these instructions:
+		
+		1) Create a route in server/routes that calls your send email method on the desired server module.
+		2) Create your emails template by creating new js file in /server/email_templates/some_template. 	
+		3) Include core module in the module.
+			require('./core')
+		4) Include your emails template in the module.
+			require('../../email_templates/some_template);
+		5) Call core.sendMail(to, from, subject, html, callback) inside a module method.
+			
+			
+		## Example server/email_templates/template.js
+			
+			'use strict'
+			
+			exports.generateHTML = function(some, variables) {
+				var html = '<h1>Some HTML with ' + some + variable + '</h1>';
+				return html;
+			}
+			
+		## Example server/routes/modules/example.js
+		
+			'use strict'
+			
+			var core = require('./core),
+				template = require('../../email_templates/template);
+				
+			exports.sendMyEmail = function(req, res) {
+				core
+					.sendMail(
+						'to@someone.com',
+						'from@someone.com',
+						'Awesome subject line',
+						template.generateHTML('some', req.body.variable),
+						function(err, responseStatus) {
+							if(!responseStatus) {
+								// There was an error, you should handle it somehow.
+							} else {
+								// The email was sent successfully, congradulations. You should probably inform the user.
+							}
+						}
+					)
+			}
 
 ## Directory Layout
     

@@ -2,21 +2,24 @@
  * Module dependencies
  */
 
+// Modules
 var express = require('express'),
-    app = module.exports = express(),
-    bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    env = process.env.NODE_ENV || 'development',
-    errorHandler = require('errorhandler'),
-    http = require('http'),
-    methodOverride = require('method-override'),
-    morgan = require('morgan'),
-    passport = require('passport'),
-    path = require('path'),
-    routes = require('./server/routes/index'),
-    secret = process.env.SESSION_SECRET,
-    session = require('express-session'),
-    FileStore = require('session-file-store')(session);
+  app = module.exports = express(),
+  bodyParser = require('body-parser'),
+  cookieParser = require('cookie-parser'),
+  env = process.env.NODE_ENV || 'development',
+  errorHandler = require('errorhandler'),
+  http = require('http'),
+  methodOverride = require('method-override'),
+  morgan = require('morgan'),
+  passport = require('passport'),
+  path = require('path'),
+  routes = require('./server/routes/index'),
+  secret = process.env.SESSION_SECRET,
+  session = require('express-session'),
+  FileStore = require('session-file-store')(session);
+
+// Properties
 var secure = true;
 
 /**
