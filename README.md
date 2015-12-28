@@ -84,38 +84,38 @@ This application is build on the Angular.js for the frontend and Express, Node &
 		5) Call core.sendMail(to, from, subject, html, callback) inside a module method.
 			
 			
-		### Example server/email_templates/template.js
+### Example server/email_templates/template.js
 			
-			'use strict'
+	'use strict'
+	
+	exports.generateHTML = function(some, variables) {
+		var html = '<h1>Some HTML with ' + some + variable + '</h1>';
+		return html;
+	}
 			
-			exports.generateHTML = function(some, variables) {
-				var html = '<h1>Some HTML with ' + some + variable + '</h1>';
-				return html;
-			}
-			
-		### Example server/routes/modules/example.js
+### Example server/routes/modules/example.js
 		
-			'use strict'
-			
-			var core = require('./core),
-				template = require('../../email_templates/template);
-				
-			exports.sendMyEmail = function(req, res) {
-				core
-					.sendMail(
-						'to@someone.com',
-						'from@someone.com',
-						'Awesome subject line',
-						template.generateHTML('some', req.body.variable),
-						function(err, responseStatus) {
-							if(!responseStatus) {
-								// There was an error, you should handle it somehow.
-							} else {
-								// The email was sent successfully, congradulations. You should probably inform the user.
-							}
-						}
-					)
-			}
+	'use strict'
+	
+	var core = require('./core),
+		template = require('../../email_templates/template);
+		
+	exports.sendMyEmail = function(req, res) {
+		core
+			.sendMail(
+				'to@someone.com',
+				'from@someone.com',
+				'Awesome subject line',
+				template.generateHTML('some', req.body.variable),
+				function(err, responseStatus) {
+					if(!responseStatus) {
+						// There was an error, you should handle it somehow.
+					} else {
+						// The email was sent successfully, congradulations. You should probably inform the user.
+					}
+				}
+			)
+	}
 
 ## Directory Layout
     
