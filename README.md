@@ -32,7 +32,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	13) Install Chrome extension postman REST client // This isn't necessary but it helps debug API endpoints.
 		https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en
 		
-### Environment variables
+## Environment variables
 
 	SESSION_SECRET -> use any long nonsensical sentence. i.e. 'The green card climbed robin hood's luggage and found a purple sun eating some BBQ; Bazinga he exclaimed!'
 	NODE_ENV -> use either 'development', 'ppmo' or 'production'
@@ -41,7 +41,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	SMTP_USER -> SMTP host username
 	SMTP_PASS -> SMTP host password
 	
-### Running the app
+## Running the app
 
 	1) Open a ruby command prompt
 	2) Navigate to the /app directory
@@ -52,7 +52,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	7) Run > set node_env=development // Sets node_env to development
 	8) Run > npm start // Starts the application and monitors for app changes. Also starts postman debugger
 
-### Running tests
+## Running tests
 
 	1) Open a ruby command prompt
 	2) Navigate to the /tests directory
@@ -61,7 +61,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	TIP: If you want to only run a single test of suite of tests use "fdescribe" and "fit" instead of "describe" and "it" to indicate which tests to run; All other tests will be ignored.
 	TIP: If you want to disable a single test or a suite of tests use "xdescribe" and "xit" instead of "describe" and "it" to indicate which tests should be ignored; All other tests will run.
 
-### Checking code coverage
+## Checking code coverage
 
 	Karma will automaticly check the coverage of your unit tests whenever it detects a change to the code. To view the coverage results navigate to the following directory:
 	
@@ -69,7 +69,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	
 	TIP: You will see a folder with the coverage results for each browser being monitored, denoted by '**' in the path above.
 	
-### Sending Emails from the application
+## Sending Emails from the application
 	
 	The application uses nodemailer to send SMTP emails. To send emails you must first set the enviornment variables for SMTP_HOST (host address), SMTP_USER (username), and SMTP_PASS (password). These variables will be uniuqe to the email server you are using.
 	
@@ -84,7 +84,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 		5) Call core.sendMail(to, from, subject, html, callback) inside a module method.
 			
 			
-		## Example server/email_templates/template.js
+		### Example server/email_templates/template.js
 			
 			'use strict'
 			
@@ -93,7 +93,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 				return html;
 			}
 			
-		## Example server/routes/modules/example.js
+		### Example server/routes/modules/example.js
 		
 			'use strict'
 			
@@ -161,6 +161,8 @@ This application is build on the Angular.js for the frontend and Express, Node &
 		server/ 			--> contains server directories/files
 			crypto.js			--> AES 256 encryption/decryption
 			passport.js			--> passport.js configuration
+			email_templates/		--> Template directory for application emails
+				*.js				--> Template for individual emails
 			models/				--> sequelize models
 				index.js			--> model index file, all models must be registered in this file
 				*.js				--> model code
