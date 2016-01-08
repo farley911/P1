@@ -132,12 +132,12 @@ This application is build on the Angular.js for the frontend and Express, Node &
 				angularApp.js       --> declare top-level app module
 				lib/				--> angular and 3rd party JavaScript libraries
 					jquery-2.1.4.min.js	--> jQuery 2.1.4
-					ui.bootstrap-tpls-0.12.0.min.js	--> Angular bootstrap UI	
 					angular/			--> contains angular code and add-ons
 						i18n/				--> language files
 						angular.js			--> the latest angular js
 						angular.min.js		--> the latest minified angular js
 						angular-*.js		--> angular add-on modules
+						ui.bootstrap-tpls-0.14.3.min.js	--> Angular bootstrap UI	
 						version.txt 		--> version number		
 			modules/			--> Application modules
 				app.module.js	--> main application module definition, to include a module in the application add it here.
