@@ -9,10 +9,24 @@
 
   function userFactory($http, $q, sessionStorageFactory){
     var user = {
+      // Properties
+      data: {
+        name: ''
+      },
+
+      // Methods
+      activate: activate,
       getUser: getUser
     }
 
     return user;
+
+    function activate() {
+      user.getUser()
+        .then(function(currentUser) {
+          user.data.name = currentUser.first_name + ' ' + currentUser.last_name;
+        });
+    }
 
     function getUser() {
       var user = sessionStorageFactory.getObj('user');

@@ -63,9 +63,9 @@ describe('Auth Controller Tests', function () {
       };
     });
 
-    it('should call authFactory.login() with $scope.user', function () {
+    it('should call authFactory.login()', function () {
       Auth.login();
-      expect(authFactory.login).toHaveBeenCalledWith(Auth.user);
+      expect(authFactory.login).toHaveBeenCalledWith();
     });
 
     it('should call $state.go("secure.user") on successful login', function () {

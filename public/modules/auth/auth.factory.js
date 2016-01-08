@@ -5,38 +5,48 @@
     .module('P1.authFactory', [])    
     .factory('authFactory', authFactory);
 
-  authFactory.$inject = ['$http', '$q', 'sessionStorageFactory'];
+  authFactory.$inject = ['$http', '$q', '$stateParams', 'sessionStorageFactory'];
 
-  function authFactory($http, $q, sessionStorageFactory){
+  function authFactory($http, $q, $stateParams, sessionStorageFactory){
     var auth = {
-      // properties
+      // Properties
       errMsg: '',
+      forgotPasswordError: false,
+      forgotPasswordFeedback: '',
       hasErrMsg: false,
       isLoggedIn: false,
       scope: null,
+      user: {
+        email: $stateParams.email,
+        username: '',
+        password: '',
+        c_password: ''
+      },
 
-      // methods
+      // Methods
       activate: activate,
       checkAuth: checkAuth,
       forgotPassword: forgotPassword,
       login: login,
       logout: logout,
-      updatePassword: updatePassword
+      updatePassword: updatePassword,
+      watchEmailParam: watchEmailParam
     };
 
     return auth;
 
     function activate() {
       auth.checkAuth(); // Check is the user is logged in.
+      auth.watchEmailParam(); // Watch $stateParam.email for changes so that it stays in sync.
     }
 
-    function login(user){
-      return $http.post('login', user)
-        .success(function(data){
+    function login(){
+      return $http.post('login', auth.user)
+        .then(function(data){
           auth.isLoggedIn = true;
           if(auth.scope.$close) auth.scope.$close();
         })
-        .error(function() {
+        .catch(function() {
           auth.hasErrMsg = true;
           auth.errMsg = 'Incorrect password.';
           auth.$dismiss;
@@ -45,40 +55,81 @@
 
     function logout(){
       $http.get('logout')
-        .success(function(){
+        .then(function(){
           auth.isLoggedIn = false;
           sessionStorageFactory.remove('user');
         });
     }
 
     function checkAuth(){
-      return $http.get('isLoggedIn')
-        .success(function(data) {
-          if(!data.isLoggedIn && sessionStorageFactory.getObj('user')) {
-            sessionStorageFactory.remove('user');
-          }
-          auth.isLoggedIn = data.isLoggedIn;    
-        });
-    }
-
-    function forgotPassword(email) {
       var defered = $q.defer();
 
-      $http({
-        method: 'POST',
-        url: '/forgotPassword.php',
-        data: $.param(email),
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      })
-      .success(function (data) {
-        defered.resolve(data);
-      });
+      $http.get('isLoggedIn')
+        .then(function(res) {
+          if(!res.data.isLoggedIn && sessionStorageFactory.getObj('user')) {
+            sessionStorageFactory.remove('user');
+          }
+          auth.isLoggedIn = res.data.isLoggedIn;
+          defered.resolve();
+        });
 
       return defered.promise;
     }
 
-    function updatePassword(user) {
-      return $http.post('updatePassword', user);
+    function forgotPassword(email) {
+      if(email) {
+        auth.forgotPasswordFeedback = '';
+        auth.forgotPasswordError = '';
+
+        $http.post('forgotPassword', { email: email })
+          .then(function (res) {
+            auth.forgotPasswordFeedback = res.data.message;
+            $('#forgotPassword').modal();
+          })
+          .catch(function (err) {
+            auth.forgotPasswordError = err.data.message;
+            $('#forgotPassword').modal();
+          });
+      }
+    }
+
+    function updatePassword() {
+      var defered = $q.defer();
+
+      $http.post('updatePassword', { email: auth.user.email, password: auth.user.password })
+        .then(function(user) {
+          auth.user = user.data;
+          auth.login()
+            .then(function() {
+              defered.resolve();
+            });
+        })
+        .catch(function (err) {
+          defered.reject(err);
+        });
+
+      return defered.promise;
+      // return $http.post('updatePassword', { email: auth.user.email, password: auth.user.password })
+      //   .then(function(user) {
+      //     auth.user = user.data;
+      //     auth.checkAuth()
+      //       .then(function() {
+      //         return;
+      //       });
+      //   })
+      //   .catch(function(err) {
+      //     console.log('err', err);
+      //   });
+    }
+
+    function watchEmailParam() {
+      auth.scope.$watch(function() {
+        return $stateParams.email
+      }, function (newVal, oldVal) {
+        if(oldVal !== newVal) {
+          auth.user.email = newVal;
+        }
+      });
     }
   }
 })();

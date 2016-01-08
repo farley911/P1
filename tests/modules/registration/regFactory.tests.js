@@ -1,7 +1,7 @@
 'use strict'
 
 describe('Registration Factory Tests', function() {
-  var $httpBackend, defer, user, authFactory, registrationFactory, registerReqHandler;
+  var $httpBackend, defer, user, authFactory, doesUserExistReqHandler, registrationFactory, registerReqHandler, setValiditySpy;
 
   beforeEach(module('P1'));
 
@@ -9,8 +9,21 @@ describe('Registration Factory Tests', function() {
     $httpBackend = _$httpBackend_; 
     defer = $q.defer();
     registerReqHandler = $httpBackend.when('POST', 'register').respond(defer.promise);
+    doesUserExistReqHandler = $httpBackend.when('POST', 'doesUserExist').respond(defer.promise);
+    setValiditySpy = jasmine.createSpy('$setValidity');
     registrationFactory = $injector.get('registrationFactory');
     authFactory = $injector.get('authFactory');
+
+    registrationFactory.regForm = {
+      username: {
+        $valid: true,
+        $setValidity: setValiditySpy
+      },
+      email: {
+        $valid: true,
+        $setValidity: setValiditySpy
+      }
+    }
   }));
 
   afterEach(function() {
@@ -18,9 +31,10 @@ describe('Registration Factory Tests', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('authFactory.register(user)', function() {
+  describe('registrationFactory.register()', function() {
     beforeEach(function () {
       user = {
+        username: 'bwayne',
         email: 'bwayne@wayneenterprise.com',
         first_name: 'Bruce',
         last_name: 'Wyane',
@@ -30,7 +44,8 @@ describe('Registration Factory Tests', function() {
 
     it('should POST user to register', function() {
       $httpBackend.expectPOST('register', user);
-      registrationFactory.register(user);
+      registrationFactory.user = user;
+      registrationFactory.register();
       $httpBackend.flush();
     });
 
@@ -40,65 +55,60 @@ describe('Registration Factory Tests', function() {
       $httpBackend.flush();
       expect(authFactory.isLoggedIn).toEqual(true);
     });
+
+    it('should set registration.error if registrationFactory.register() returns an error', function () {
+      $httpBackend.expectPOST('register').respond(400, 'this is the error');
+      registrationFactory.register();
+      $httpBackend.flush();
+      expect(registrationFactory.error).toEqual('this is the error');
+    });
   });
 
   describe('registrationFactory.doesUserExist()', function() {
-    it('should return true is a user exists', function() {
-      user = {
-        email: 'bwayne@wayneenterprise.com'
-      };
-      $httpBackend.whenPOST('doesUserExist').respond({ message: 'user exists' });
-      var res;
-      var doesUserExist = registrationFactory.doesUserExist(user)
-        .then(function (data) {
-          res = data;
-        });
-      $httpBackend.flush();
-      expect(res).toEqual(true);
+    it('should not POST /doesUserExist if registrationFactory.regForm.email.$valid is false', function() {
+      registrationFactory.regForm.email.$valid = false;
+      registrationFactory.doesUserExist();
+      expect($httpBackend.flush).toThrowError('No pending request to flush !');
     });
 
-    it('should return false if no user exists', function () {
-      user = {
-        email: 'bwayne@wayneenterprise.com'
-      };
-      $httpBackend.whenPOST('doesUserExist').respond('');
-      var res;
-      var doesUserExist = registrationFactory.doesUserExist(user)
-        .then(function (data) {
-          res = data;
-        });
-      $httpBackend.flush();
-      expect(res).toEqual(false);
+    describe('check email field validity', function () {
+      it('should call registrationFactory.regForm.email.$setValidity with userExists set to false if /doesUserExist responds with "user exists"', function () {
+        $httpBackend.expectPOST('doesUserExist').respond({ message: 'user exists' });
+        registrationFactory.doesUserExist();
+        $httpBackend.flush();
+        expect(registrationFactory.regForm.email.$setValidity).toHaveBeenCalledWith('userExists', false);
+      });
+
+      it('should call registrationFactory.regForm.email.$setValidity with userExists set to true if /doesUserExist responds with anything besides "user exists"', function () {
+        $httpBackend.expectPOST('doesUserExist').respond({ message: 'okay' });
+        registrationFactory.doesUserExist();
+        $httpBackend.flush();
+        expect(registrationFactory.regForm.email.$setValidity).toHaveBeenCalledWith('userExists', true);
+      });
     });
   });
 
   describe('registrationFactory.checkUsername()', function() {
-    it('should return true is a username is taken', function() {
-      user = {
-        username: 'bwayne'
-      };
-      $httpBackend.whenPOST('checkUsername').respond({ message: 'username available' });
-      var res;
-      var checkUsername = registrationFactory.checkUsername(user)
-        .then(function (data) {
-          res = data;
-        });
-      $httpBackend.flush();
-      expect(res).toEqual(true);
+    it('should not POST /checkUsername if registrationFactory.regForm.username.$valid is false', function() {
+      registrationFactory.regForm.username.$valid = false;
+      registrationFactory.checkUsername();
+      expect($httpBackend.flush).toThrowError('No pending request to flush !');
     });
 
-    it('should return false if no matching user is found', function () {
-      user = {
-        username: 'bwayne'
-      };
-      $httpBackend.whenPOST('checkUsername').respond('');
-      var res;
-      var checkUsername = registrationFactory.checkUsername(user)
-        .then(function (data) {
-          res = data;
-        });
-      $httpBackend.flush();
-      expect(res).toEqual(false);
+    describe('check username field validity', function () {
+      it('should call registrationFactory.regForm.username.$setValidity with usernameTaken set to true if /checkUsername responds with "username available"', function () {
+        $httpBackend.expectPOST('checkUsername').respond({ message: 'username available' });
+        registrationFactory.checkUsername();
+        $httpBackend.flush();
+        expect(registrationFactory.regForm.username.$setValidity).toHaveBeenCalledWith('usernameTaken', true);
+      });
+
+      it('should call registrationFactory.regFactory.username.$setValidity with usernameTaken set to false if /checkUsername responds with anything besides "username available"', function () {
+        $httpBackend.expectPOST('checkUsername').respond({ message: 'username taken' });
+        registrationFactory.checkUsername();
+        $httpBackend.flush();
+        expect(registrationFactory.regForm.username.$setValidity).toHaveBeenCalledWith('usernameTaken', false);
+      });
     });
   });
 });

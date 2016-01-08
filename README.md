@@ -32,13 +32,16 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	13) Install Chrome extension postman REST client // This isn't necessary but it helps debug API endpoints.
 		https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en
 		
-### Environment variables
+## Environment variables
 
 	SESSION_SECRET -> use any long nonsensical sentence. i.e. 'The green card climbed robin hood's luggage and found a purple sun eating some BBQ; Bazinga he exclaimed!'
 	NODE_ENV -> use either 'development', 'ppmo' or 'production'
 	AES_KEY -> This can be anything for development however you need to use the same key every time or you will get different values for encrypted items later when the key changes. For production enviorments (ppmo & prod) use a long base64 encrypted string so it's computationally expensive to brute force crack.
+	SMTP_HOST -> a valid SMTP host address i.e. some.host.com
+	SMTP_USER -> SMTP host username
+	SMTP_PASS -> SMTP host password
 	
-### Running the app
+## Running the app
 
 	1) Open a ruby command prompt
 	2) Navigate to the /app directory
@@ -49,7 +52,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	7) Run > set node_env=development // Sets node_env to development
 	8) Run > npm start // Starts the application and monitors for app changes. Also starts postman debugger
 
-### Running tests
+## Running tests
 
 	1) Open a ruby command prompt
 	2) Navigate to the /tests directory
@@ -58,7 +61,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	TIP: If you want to only run a single test of suite of tests use "fdescribe" and "fit" instead of "describe" and "it" to indicate which tests to run; All other tests will be ignored.
 	TIP: If you want to disable a single test or a suite of tests use "xdescribe" and "xit" instead of "describe" and "it" to indicate which tests should be ignored; All other tests will run.
 
-### Checking code coverage
+## Checking code coverage
 
 	Karma will automaticly check the coverage of your unit tests whenever it detects a change to the code. To view the coverage results navigate to the following directory:
 	
@@ -66,10 +69,53 @@ This application is build on the Angular.js for the frontend and Express, Node &
 	
 	TIP: You will see a folder with the coverage results for each browser being monitored, denoted by '**' in the path above.
 	
-### Receiving updates from upstream
-
-Just fetch the changes and merge them into your project with git.
-
+## Sending Emails from the application
+	
+	The application uses nodemailer to send SMTP emails. To send emails you must first set the enviornment variables for SMTP_HOST (host address), SMTP_USER (username), and SMTP_PASS (password). These variables will be uniuqe to the email server you are using.
+	
+	Once nodemailer has been configured you can send emails by following these instructions:
+		
+		1) Create a route in server/routes that calls your send email method on the desired server module.
+		2) Create your emails template by creating new js file in /server/email_templates/some_template. 	
+		3) Include core module in the module.
+			require('./core')
+		4) Include your emails template in the module.
+			require('../../email_templates/some_template);
+		5) Call core.sendMail(to, from, subject, html, callback) inside a module method.
+			
+			
+### Example /server/email_templates/example_template.js
+			
+	'use strict'
+	
+	exports.generateHTML = function(some, variables) {
+		var html = '<h1>Some HTML with ' + some + variable + '</h1>';
+		return html;
+	}
+			
+### Example /server/routes/modules/example_module.js
+		
+	'use strict'
+	
+	var core = require('./core),
+		template = require('../../email_templates/template);
+		
+	exports.sendMyEmail = function(req, res) {
+		core
+			.sendMail(
+				'to@someone.com',
+				'from@someone.com',
+				'Awesome subject line',
+				template.generateHTML('some', req.body.variable),
+				function(err, responseStatus) {
+					if(!responseStatus) {
+						// There was an error, you should handle it somehow.
+					} else {
+						// The email was sent successfully, congradulations. You should probably inform the user.
+					}
+				}
+			)
+	}
 
 ## Directory Layout
     
@@ -115,6 +161,8 @@ Just fetch the changes and merge them into your project with git.
 		server/ 			--> contains server directories/files
 			crypto.js			--> AES 256 encryption/decryption
 			passport.js			--> passport.js configuration
+			email_templates/		--> Template directory for application emails
+				*.js				--> Template for individual emails
 			models/				--> sequelize models
 				index.js			--> model index file, all models must be registered in this file
 				*.js				--> model code

@@ -63,7 +63,7 @@ describe('Auth Factory Tests', function() {
 
   describe('authFactory.login()', function() {
     beforeEach(function() {
-      user = {
+      authFactory.user = {
         email: 'bwayne@wayneenterprise.com',
         password: 'password123'
       };
@@ -71,41 +71,41 @@ describe('Auth Factory Tests', function() {
 
     it('should POST user to login', function() {
       $httpBackend.expectPOST('login', user);
-      authFactory.login(user);
+      authFactory.login();
       $httpBackend.flush();
     });
 
     it('should set authFactory.isLoggedIn to true on successful login', function() {
       $httpBackend.expectPOST('login').respond(200);
-      authFactory.login(user);
+      authFactory.login();
       $httpBackend.flush();
       expect(authFactory.isLoggedIn).toEqual(true);
     });
 
     it('should call $close() on successful login', function() {
       $httpBackend.expectPOST('login').respond(200);
-      authFactory.login(user);
+      authFactory.login();
       $httpBackend.flush();
       expect(closeSpy).toHaveBeenCalled();
     });
 
     it('should set authFactory.hasErrMsg to true if login fails', function() {
       $httpBackend.expectPOST('login').respond(400);
-      authFactory.login(user);
+      authFactory.login();
       $httpBackend.flush();
       expect(authFactory.hasErrMsg).toEqual(true);
     });
 
     it('should set authFactory.errMsg to "Incorrect Password" if login fails', function() {
       $httpBackend.expectPOST('login').respond(400);
-      authFactory.login(user);
+      authFactory.login();
       $httpBackend.flush();
       expect(authFactory.errMsg).toEqual('Incorrect password.');
     });
 
     it('should call authFactory.$dismiss() if login fails', function() {
       $httpBackend.expectPOST('login').respond(400);
-      authFactory.login(user);
+      authFactory.login();
       $httpBackend.flush();
       expect(dismissSpy).toHaveBeenCalled;
     });
@@ -140,7 +140,7 @@ describe('Auth Factory Tests', function() {
         password: 'password123'
       };
       $httpBackend.expectPOST('login');
-      authFactory.login(user);
+      authFactory.login();
       $httpBackend.flush();
       expect(authFactory.isLoggedIn).toEqual(true);
     });

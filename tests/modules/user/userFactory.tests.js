@@ -60,5 +60,12 @@ describe('User Factory Tests', function() {
       userFactory.getUser();
       expect($httpBackend.flush).toThrowError('No pending request to flush !');
     });
+
+    it('should set userFactory.data.name when userFactory.activate() is called', function() {
+      $httpBackend.expectGET('getUser').respond(user);
+      userFactory.activate();
+      $httpBackend.flush();
+      expect(userFactory.data.name).toEqual('Bruce Wayne');
+    })
   });
 });

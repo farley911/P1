@@ -10,10 +10,10 @@
       'P1.app'
     ])
     .config(function ($stateProvider, $locationProvider, $provide, $urlRouterProvider) {
-      var isUserLoggedIn = function($q, $state, loginFactory, authFactory) {
-        return authFactory.checkAuth()
-          .then(function(res) {
-            if(!res.data.isLoggedIn) {
+      var isUserLoggedIn = function($state, loginFactory, authFactory) {
+        authFactory.checkAuth()
+          .then(function() {
+            if(!authFactory.isLoggedIn) {
               return loginFactory.openLoginModal() // If the user isn't logged in display the login modal so they can log in.
                 .then(function() {
                   return $state.go($state.next.name, $state.toParams); // If they successfully log in send them to the page they requested.
@@ -22,6 +22,7 @@
                 });
             }
           });
+        
       };
 
       // Decorator needed to route users back to the page they were attempting to access when login modal was displayed.

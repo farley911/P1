@@ -8,11 +8,11 @@
   User.$inject = ['userFactory'];
 
   function User(userFactory) {
+    // Properties
     var user = this;
+    user.factory = userFactory;
 
-    userFactory.getUser()
-      .then(function(currentUser) {
-        user.name = currentUser.first_name + ' ' + currentUser.last_name;
-      })
+    // Methods
+    userFactory.activate();
   }
 })();

@@ -11,10 +11,10 @@ router.get('/getenv', core.getEnv); // Get the enviornment
 
 // AUTH ROUTES
 router.post('/login', auth.login); // Log a local user into the application using passport
-router.post('/ldap-login', auth.ldapLogin); // Log a LDAP user into the application using passport
 router.get('/logout', auth.logout); // Log the current user out of the system
 router.get('/isLoggedIn', auth.isLoggedIn); // Check is the user is logged in
 router.post('/updatePassword', auth.updatePassword); // Updates a users password
+router.post('/forgotPassword', auth.forgotPassword); // Send forgot password email
 
 // REGISTRATION ROUTES
 router.post('/register', registration.register); // Register the user for the application

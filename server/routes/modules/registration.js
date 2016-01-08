@@ -38,7 +38,7 @@ exports.register = function(req, res) {
   })
   .catch(function(err) {
     console.log('User creation failed. Message: ' + err);
-    res.send(err);
+    res.status(401).json(err);
   });
 };
 
