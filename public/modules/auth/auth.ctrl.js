@@ -11,6 +11,7 @@
     // Properties
     var auth = this;
     auth.factory = authFactory;
+    auth.loginFactory = loginFactory;
 
     // Methods
     auth.forgotPassword = forgotPassword;

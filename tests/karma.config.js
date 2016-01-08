@@ -19,11 +19,13 @@ module.exports = function(config) {
       'js/lib/*.js',
       'js/lib/angular/angular-ui-states.js',
       'js/lib/angular/angular-messages.js',
+      'js/lib/angular/ui-bootstrap-tpls-0.14.3.min.js',
 
       // include module definitions before the rest of the module code to ensure the module is available. 
       'modules/app.module.js',
       'modules/attention/attention.module.js',
       'modules/auth/auth.module.js',
+      'modules/core/core.module.js',
       'modules/home/home.module.js',
       'modules/onboarding/onboarding.module.js',
       'modules/registration/registration.module.js',

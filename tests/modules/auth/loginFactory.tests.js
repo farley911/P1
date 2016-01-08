@@ -5,13 +5,13 @@ describe('Login Factory Tests', function() {
 
   beforeEach(module('P1'));
 
-  beforeEach(inject(function($injector, _$modal_) {
-    modal = _$modal_;
+  beforeEach(inject(function($injector, _$uibModal_) {
+    modal = _$uibModal_;
     loginFactory = $injector.get('loginFactory');
   }));
 
-  describe('loginFactory.openLoginModal($modal)', function () {
-    it('should call modal.open when loginFactory.openLoginModal is called', function () {
+  describe('loginFactory.openLoginModal()', function () {
+    it('should call coreFactory.openModal()', function () {
       spyOn(modal, 'open').and.callFake(function () {
         return {
           result: ''

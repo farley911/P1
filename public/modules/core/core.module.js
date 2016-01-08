@@ -4,6 +4,7 @@
   angular
     .module('P1.core', [
       /* Include global providers */
+      'P1.coreFactory',
       'P1.alyCompareToDirective',
       'P1.sessionStorageFactory'
     ]);

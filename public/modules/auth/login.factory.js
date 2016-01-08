@@ -5,21 +5,17 @@
     .module('P1.loginFactory', [])    
     .factory('loginFactory', loginFactory);
 
-  loginFactory.$inject = ['$modal'];
+  loginFactory.$inject = ['coreFactory'];
 
-  function loginFactory($modal) {
-    var loginModal = { openLoginModal: openLoginModal };
+  function loginFactory(coreFactory) {
+    var loginModal = { 
+      openLoginModal: openLoginModal 
+    };
 
     return loginModal;
 
 	  function openLoginModal () {
-	    var instance = $modal.open({
-	      templateUrl: 'modules/auth/login.html',
-	      controller: 'Auth',
-	      controllerAs: 'auth'
-	    })
-
-	    return instance.result;
+      coreFactory.openModal('modules/auth/login.html', 'Auth', 'auth');
 	  };
   }
 })();
