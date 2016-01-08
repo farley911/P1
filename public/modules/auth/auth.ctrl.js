@@ -5,20 +5,12 @@
     .module('P1.auth')
     .controller('Auth', Auth);
 
-  Auth.$inject = ['$scope', '$state', '$stateParams', 'authFactory', 'loginFactory', 'sessionStorageFactory'];
+  Auth.$inject = ['$scope', '$state', 'authFactory', 'loginFactory'];
 
-  function Auth($scope, $state, $stateParams, authFactory, loginFactory, sessionStorageFactory) {
+  function Auth($scope, $state, authFactory, loginFactory) {
     // Properties
     var auth = this;
     auth.factory = authFactory;
-    auth.hasFlash = true;
-    auth.resetPassword = {
-      email: $stateParams.email,
-      password: '',
-      c_password: '',
-      feedback: ''
-    };
-    auth.user = {};
 
     // Methods
     auth.forgotPassword = forgotPassword;
@@ -33,7 +25,7 @@
     authFactory.activate();
 
     function login() {
-      authFactory.login(auth.user)
+      authFactory.login()
         .then(function() {
           $state.go('secure.user');
         });
@@ -45,29 +37,14 @@
     }
 
     function forgotPassword(email) {
-      if(email) {
-        auth.resetPassword.feedback = '';
-        auth.resetPassword.error = '';
-        authFactory.forgotPassword({ email: email })
-          .then(function (res) {
-            console.log('res', res.data.message);
-            auth.resetPassword.feedback = res.data.message;
-            $('#forgotPassword').modal();
-          })
-          .catch(function (err) {
-            console.log('err', err.data.message);
-            auth.resetPassword.error = err.data.message;
-            $('#forgotPassword').modal();
-          });
-      }
-    };
-    
+      authFactory.forgotPassword(email);
+    }
+
     function updatePassword() {
-      authFactory.updatePassword(auth.resetPassword)
-        .then(function (res) {
-          auth.user = res.data;
-          auth.login();
+      authFactory.updatePassword()
+        .then(function() {
+          $state.go('secure.user');
         });
-    };
+    }
   }
 })();

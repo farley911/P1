@@ -84,7 +84,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 		5) Call core.sendMail(to, from, subject, html, callback) inside a module method.
 			
 			
-### Example server/email_templates/template.js
+### Example /server/email_templates/example_template.js
 			
 	'use strict'
 	
@@ -93,7 +93,7 @@ This application is build on the Angular.js for the frontend and Express, Node &
 		return html;
 	}
 			
-### Example server/routes/modules/example.js
+### Example /server/routes/modules/example_module.js
 		
 	'use strict'
 	

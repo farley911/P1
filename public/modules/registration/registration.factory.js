@@ -5,9 +5,9 @@
     .module('P1.registrationFactory', [])    
     .factory('registrationFactory', registrationFactory);
 
-  registrationFactory.$inject = ['$http', '$q', 'authFactory'];
+  registrationFactory.$inject = ['$http', 'authFactory'];
 
-  function registrationFactory($http, $q, authFactory){
+  function registrationFactory($http, authFactory){
     var registration = {
       // Properties
       error: '',

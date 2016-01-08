@@ -16,7 +16,7 @@ exports.forgotPassword = function(req, res) {
       req.body.email, 
       'eric@ericfarley.net', 
       'Password Reset Instructions', 
-      template.generateHTML(req.body.email),
+      forgotPasswordTemplate.generateHTML(req.body.email),
       function (err, responseStatus) {
         if(!responseStatus) {
           return res.status(401).json({ err: err, message: 'Sorry but there appears to have been an error sending your email.' });  
@@ -40,7 +40,7 @@ exports.login = function(req, res, next) {
       })
       .then(function(currentUser) {
         if(currentUser) {
-          currentUser.updateAttributes({
+          return currentUser.updateAttributes({
             last_login: new Date()
           })
         }
@@ -78,24 +78,51 @@ exports.isLoggedIn = function(req, res) {
 
 exports.updatePassword = function(req, res) {
   var password = req.body.password;
-  User.find({
+
+  return User.find({
     where: {
       email: crypto.encrypt(req.body.email)
     }
   })
-  .then(function(user) {
-    user.updateAttributes({
+  .then(function (user) {
+    return user.update({
       password: password
     })
-    .then(function() {
-      console.log('Password reset');
-      return res.status(200).json({ 
-        username: user.username,
-        password: password
-      });
+    .then(function (updatedUser) {
+      console.log('password reset!');
+      return res.status(200).json({ username: user.username, password: password });
     })
-    .catch(function(err) {
-      return res.status(401).json({ message: 'Error!', error: err });
+    .catch(function (err) {
+      return res.status(401).json({ message: 'Error', error: err });
     });
+  })
+  .catch(function (err) {
+    return res.status(401).json({ message: 'Error!', error: err });
   });
+
+  // var password = req.body.password;
+
+  // User.find({
+  //   where: {
+  //     email: crypto.encrypt(req.body.email)
+  //   }
+  // })
+  // .then(function(user) {
+  //   return user.updateAttributes({
+  //     password: password
+  //   })
+  //   .then(function(updatedUser) {
+  //     console.log('Password reset');
+  //     req.login(updatedUser, function(err) {
+  //       if(err) {
+  //         return res.status(401).json(err);
+  //       } else {
+  //         return res.status(200).json({ username: user.username, password: password });
+  //       }
+  //     });      
+  //   })
+  //   .catch(function(err) {
+  //     return res.status(401).json({ message: 'Error!', error: err });
+  //   });
+  // });
 };
