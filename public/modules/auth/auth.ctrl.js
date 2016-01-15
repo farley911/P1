@@ -21,10 +21,6 @@
     auth.openLoginModal = loginFactory.openLoginModal;
     auth.updatePassword = updatePassword;
 
-    // Config
-    authFactory.scope = $scope;
-    authFactory.activate();
-
     function login() {
       authFactory.login()
         .then(function() {

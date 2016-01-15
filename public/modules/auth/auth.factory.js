@@ -5,9 +5,9 @@
     .module('P1.authFactory', [])    
     .factory('authFactory', authFactory);
 
-  authFactory.$inject = ['$http', '$q', '$stateParams', 'sessionStorageFactory'];
+  authFactory.$inject = ['$http', '$q', '$stateParams', 'coreFactory', 'sessionStorageFactory'];
 
-  function authFactory($http, $q, $stateParams, sessionStorageFactory){
+  function authFactory($http, $q, $stateParams, coreFactory, sessionStorageFactory){
     var auth = {
       // Properties
       errMsg: '',
@@ -24,7 +24,7 @@
       },
 
       // Methods
-      activate: activate,
+      //activate: activate,
       checkAuth: checkAuth,
       forgotPassword: forgotPassword,
       login: login,
@@ -35,16 +35,11 @@
 
     return auth;
 
-    function activate() {
-      auth.checkAuth(); // Check is the user is logged in.
-      auth.watchEmailParam(); // Watch $stateParam.email for changes so that it stays in sync.
-    }
-
     function login(){
       return $http.post('login', auth.user)
         .then(function(data){
           auth.isLoggedIn = true;
-          if(auth.scope.$close) auth.scope.$close();
+          coreFactory.closeModal();
         })
         .catch(function() {
           auth.hasErrMsg = true;
