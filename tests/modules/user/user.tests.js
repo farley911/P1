@@ -1,18 +1,21 @@
 'use strict'
 
 describe('User Controller Tests', function () {
-	var $controller, $scope, defer, userFactory, activateSpy, getUserSpy, User;
+	var $controller, $httpBackend, $scope, defer, isLoggedInReqHandler, userFactory, activateSpy, getUserSpy, User;
 
 	beforeEach(module('P1'));
 
-	beforeEach(inject(function (_$controller_, _$rootScope_, $q) {
+	beforeEach(inject(function (_$controller_, _$httpBackend_, _$rootScope_, $q) {
 		$controller = _$controller_;
+    $httpBackend = _$httpBackend_
 		$scope = _$rootScope_;
     defer = $q.defer();
 
     // Create spies
     activateSpy = jasmine.createSpy('activate').and.returnValue(defer.promise);
 		getUserSpy = jasmine.createSpy('getUser').and.returnValue(defer.promise);
+
+    isLoggedInReqHandler = $httpBackend.when('GET', 'isLoggedIn').respond(defer.promise);
 
 		userFactory = {
       activate: activateSpy,

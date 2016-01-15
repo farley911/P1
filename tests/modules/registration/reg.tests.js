@@ -1,7 +1,7 @@
 'use strict'
 
 describe('Registration Controller Tests', function() {
-  var $controller, $scope, defer, registerSpy, doesUserExistSpy, checkUsernameSpy, registrationFactory, Registration, $httpBackend, authReqHandler, checkUsernameReqHandler, loginReqHandler, userReqHandler, $state, goSpy;
+  var $controller, $scope, defer, registerSpy, doesUserExistSpy, checkUsernameSpy, registrationFactory, Registration, $httpBackend, authReqHandler, checkUsernameReqHandler, isLoggedInReqHandler, loginReqHandler, userReqHandler, $state, goSpy;
 
   beforeEach(module('P1'));
 
@@ -39,6 +39,7 @@ describe('Registration Controller Tests', function() {
     checkUsernameReqHandler = $httpBackend.when('POST', 'checkUsername').respond(defer.promise);
     loginReqHandler = $httpBackend.when('GET', 'modules/user/login.html').respond({ body: '<html><body>Mock login</body></html>'});
     userReqHandler = $httpBackend.when('GET', 'modules/user/user.html').respond({ body: '<html><body>Mock user profile</body></html>'});
+    isLoggedInReqHandler = $httpBackend.when('GET', 'isLoggedIn').respond(defer.promise);
 
     // digest to update controller with services and scope
     $scope.$digest();

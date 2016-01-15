@@ -1,7 +1,7 @@
 'use strict'
 
 describe('User Factory Tests', function() {
-  var $httpBackend, defer, getUserReqHandler, userFactory, setObjSpy, getObjSpy, removeSpy, sessionStorageFactory, sessionStorageFactoryMock, user;
+  var $httpBackend, defer, isLoggedInReqHandler, getUserReqHandler, userFactory, setObjSpy, getObjSpy, removeSpy, sessionStorageFactory, sessionStorageFactoryMock, user;
 
   beforeEach(module('P1'));
 
@@ -35,10 +35,13 @@ describe('User Factory Tests', function() {
     $httpBackend = _$httpBackend_; 
     defer = $q.defer();
     getUserReqHandler = $httpBackend.when('GET', 'getUser').respond(defer.promise);
+    isLoggedInReqHandler = $httpBackend.when('GET', 'isLoggedIn').respond(defer.promise);
     userFactory = $injector.get('userFactory');
+
+    $httpBackend.flush() // Flush the isLoggedIn request that is outstanding from auth control run block
   }));
 
-  describe('authFactory.getUser()', function() {
+  describe('userFactory.getUser()', function() {
     beforeEach(function() {
       user = {
         user: {

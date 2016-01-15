@@ -1,7 +1,7 @@
 'use strict'
 
 describe('Auth Factory Tests', function() {
-  var $httpBackend, $scope, authFactory, checkAuthSpy, closeSpy, defer, dismissSpy, getObjSpy, homeReqHandler, isLoggedInReqHandler, loginReqHandler, logOutReqHandler, removeSpy, sessionStorageFactory, sessionStorageFactoryMock, setObjSpy, user;
+  var $httpBackend, $scope, authFactory, checkAuthSpy, closeSpy, defer, dismissSpy, getObjSpy, homeReqHandler, isLoggedInReqHandler, loginReqHandler, logOutReqHandler, removeSpy, closeModalSpy, openModalSpy, coreFactory, coreFactoryMock, sessionStorageFactory, sessionStorageFactoryMock, setObjSpy, user;
 
   beforeEach(module('P1'));
 
@@ -19,18 +19,29 @@ describe('Auth Factory Tests', function() {
     checkAuthSpy = jasmine.createSpy('checkAuth');
     closeSpy = jasmine.createSpy('$close');
     dismissSpy = jasmine.createSpy('$dismiss');
+    closeModalSpy = jasmine.createSpy('closeModal');
+    openModalSpy = jasmine.createSpy('openModal');
 
     sessionStorageFactoryMock = {
       setObj: setObjSpy,
       getObj: getObjSpy,
       remove: removeSpy
     }
-
     sessionStorageFactory = sessionStorageFactoryMock;
     sessionStorageFactory.remove('user'); // Prevent this value from being stored between tests
 
+    coreFactoryMock = {
+      closeModal: closeModalSpy,
+      openModal: openModalSpy
+    }
+    coreFactory = coreFactoryMock;
+
     module(function($provide) {
       $provide.value('sessionStorageFactory', sessionStorageFactoryMock);
+    });
+
+    module(function($provide) {
+      $provide.value('coreFactory', coreFactoryMock);
     });
   });
 
@@ -46,19 +57,13 @@ describe('Auth Factory Tests', function() {
     authFactory.scope = $scope;
     authFactory.scope.$close = closeSpy;
     authFactory.$dismiss = dismissSpy;
+
+    $httpBackend.flush() // Flush the isLoggedIn request that is outstanding from auth control run block
   }));
 
   afterEach(function() {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
-  });
-
-  describe('authFactory.activate()', function () {
-    it('should call authFactory.checkAuth()', function () {
-      authFactory.activate();
-      $httpBackend.flush();
-      expect(checkAuthSpy).toHaveBeenCalled;
-    });
   });
 
   describe('authFactory.login()', function() {
@@ -82,11 +87,11 @@ describe('Auth Factory Tests', function() {
       expect(authFactory.isLoggedIn).toEqual(true);
     });
 
-    it('should call $close() on successful login', function() {
+    it('should call closeModal() on successful login', function() {
       $httpBackend.expectPOST('login').respond(200);
       authFactory.login();
       $httpBackend.flush();
-      expect(closeSpy).toHaveBeenCalled();
+      expect(coreFactory.closeModal).toHaveBeenCalled();
     });
 
     it('should set authFactory.hasErrMsg to true if login fails', function() {

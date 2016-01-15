@@ -1,7 +1,7 @@
 'use strict'
 
 describe('Registration Factory Tests', function() {
-  var $httpBackend, defer, user, authFactory, doesUserExistReqHandler, registrationFactory, registerReqHandler, setValiditySpy;
+  var $httpBackend, defer, user, authFactory, doesUserExistReqHandler, isLoggedInReqHandler, registrationFactory, registerReqHandler, setValiditySpy;
 
   beforeEach(module('P1'));
 
@@ -10,6 +10,7 @@ describe('Registration Factory Tests', function() {
     defer = $q.defer();
     registerReqHandler = $httpBackend.when('POST', 'register').respond(defer.promise);
     doesUserExistReqHandler = $httpBackend.when('POST', 'doesUserExist').respond(defer.promise);
+    isLoggedInReqHandler = $httpBackend.when('GET', 'isLoggedIn').respond(defer.promise);
     setValiditySpy = jasmine.createSpy('$setValidity');
     registrationFactory = $injector.get('registrationFactory');
     authFactory = $injector.get('authFactory');
@@ -24,6 +25,8 @@ describe('Registration Factory Tests', function() {
         $setValidity: setValiditySpy
       }
     }
+
+    $httpBackend.flush() // Flush the isLoggedIn request that is outstanding from auth control run block
   }));
 
   afterEach(function() {

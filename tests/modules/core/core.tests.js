@@ -1,16 +1,20 @@
 'use strict'
 
 describe('Core Controller Tests', function () {
-  var $controller, $scope, Core, coreFactory, closeModalSpy, openModalSpy;
+  var $controller, $httpBackend, $scope, Core, coreFactory, closeModalSpy, defer, isLoggedInReqHandler, openModalSpy;
 
   beforeEach(module('P1'));
   
-  beforeEach(inject(function (_$controller_, _$rootScope_) {
+  beforeEach(inject(function (_$controller_, _$httpBackend_, _$rootScope_, $q) {
     $controller = _$controller_;
+    $httpBackend = _$httpBackend_;
     $scope = _$rootScope_;
+    defer = $q.defer();
 
     closeModalSpy = jasmine.createSpy('closeModal');
     openModalSpy = jasmine.createSpy('openModal');
+
+    isLoggedInReqHandler = $httpBackend.when('GET', 'isLoggedIn').respond(defer.promise);
 
     coreFactory = {
     	closeModal: closeModalSpy,

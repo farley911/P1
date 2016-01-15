@@ -1,12 +1,13 @@
 'use strict'
 
 describe('Auth Controller Tests', function () {
-  var $controller, $scope, $state, $window, activateSpy, Auth, authFactory, checkAuthSpy, closeSpy, defer, initializeSpy, loginFactory, goSpy, loginSpy, logoutSpy, openLoginModalSpy, sessionStorageFactory;
+  var $controller, $httpBackend, $scope, $state, $window, activateSpy, Auth, authFactory, checkAuthSpy, closeSpy, defer, initializeSpy, loginFactory, goSpy, loginSpy, logoutSpy, openLoginModalSpy, sessionStorageFactory, isLoggedInReqHandler;
 
   beforeEach(module('P1'));
   
-  beforeEach(inject(function (_$controller_, _$rootScope_, _$window_, $q, $injector) {
+  beforeEach(inject(function (_$controller_, _$httpBackend_, _$rootScope_, _$window_, $q, $injector) {
     $controller = _$controller_;
+    $httpBackend = _$httpBackend_;
     $scope = _$rootScope_;
     $window = _$window_;
     defer = $q.defer();
@@ -20,7 +21,10 @@ describe('Auth Controller Tests', function () {
     logoutSpy = jasmine.createSpy('logout');
     openLoginModalSpy = jasmine.createSpy('openLoginModal');
     initializeSpy = jasmine.createSpy('initialize');
+
     sessionStorageFactory = $injector.get('sessionStorageFactory');
+
+    isLoggedInReqHandler = $httpBackend.when('GET', 'isLoggedIn').respond(defer.promise);
 
     // Create mock services
     $scope.$close = closeSpy;
