@@ -9,7 +9,7 @@
           controller: 'Registration',
           controllerAs: 'reg',
           data: { title: 'Registration' },
-          templateUrl: 'modules/registration/registration.html',
+          templateUrl: 'modules/registration/views/registration.html',
           url: '/register'
         });
     });

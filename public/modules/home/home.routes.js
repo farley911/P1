@@ -7,7 +7,7 @@
       $stateProvider
         .state('home', {
           data: { title: 'Home' },
-          templateUrl: 'modules/home/home.html',
+          templateUrl: 'modules/home/views/home.html',
           url: '/home'
         });
     });

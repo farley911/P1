@@ -9,7 +9,7 @@
           controller: 'Auth',
           controllerAs: 'auth',
           data: { title: 'Reset Password' },
-          templateUrl: 'modules/auth/resetPassword.html',
+          templateUrl: 'modules/auth/views/resetPassword.html',
           url: '/resetPassword/:email'
         });
     });

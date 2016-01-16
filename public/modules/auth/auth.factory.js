@@ -79,11 +79,12 @@
         $http.post('forgotPassword', { email: email })
           .then(function (res) {
             auth.forgotPasswordFeedback = res.data.message;
-            coreFactory.openModal('modules/auth/forgotPassword.html', 'Auth', 'auth');
           })
           .catch(function (err) {
             auth.forgotPasswordError = err.data.message;
-            coreFactory.openModal('modules/auth/forgotPassword.html', 'Auth', 'auth');
+          })
+          .finally(function () {
+            coreFactory.openModal('modules/auth/views/forgotPassword.html', 'Auth', 'auth');
           });
       }
     }

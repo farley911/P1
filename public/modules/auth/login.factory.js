@@ -15,7 +15,7 @@
     return loginModal;
 
 	  function openLoginModal () {
-      coreFactory.openModal('modules/auth/login.html', 'Auth', 'auth');
+      coreFactory.openModal('modules/auth/views/login.html', 'Auth', 'auth');
 	  };
   }
 })();
