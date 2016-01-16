@@ -26,7 +26,7 @@
     "session-file-store": "0.0.7"
   },
   "scripts": {
-    "start": "nodemon --debug server.js"
+    "start": "node --debug server.js"
   },
   "engines": {
     "node": "5.0.x"

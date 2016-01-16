@@ -5,20 +5,19 @@
     .module('P1.auth')
     .controller('Auth', Auth);
 
-  Auth.$inject = ['$scope', '$state', 'authFactory', 'loginFactory'];
+  Auth.$inject = ['$scope', '$state', 'authFactory', 'coreFactory'];
 
-  function Auth($scope, $state, authFactory, loginFactory) {
+  function Auth($scope, $state, authFactory, coreFactory) {
     // Properties
     var auth = this;
     auth.factory = authFactory;
-    auth.loginFactory = loginFactory;
 
     // Methods
     auth.forgotPassword = forgotPassword;
     auth.isLoggedIn = authFactory.isLoggedIn;
     auth.login = login,
     auth.logout = logout;
-    auth.openLoginModal = loginFactory.openLoginModal;
+    auth.openLoginModal = openLoginModal;
     auth.updatePassword = updatePassword;
 
     function login() {
@@ -43,5 +42,9 @@
           $state.go('secure.user');
         });
     }
+
+    function openLoginModal () {
+      coreFactory.openModal('modules/auth/views/login.html', 'Auth', 'auth');
+    };
   }
 })();

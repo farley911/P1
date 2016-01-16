@@ -14,22 +14,20 @@ This application is build on the Angular.js for the frontend and Express, Node &
 		2) Run > gem install compass
 	3) Install Node.js
 		http://nodejs.org/download/
-	4) Install nodemon 
-		Run > npm install -g nodemon
-	5) Install bower 
+	4) Install bower 
 		Run > npm install -g bower
-	6) Instal Karma Command Line Interface
+	5) Instal Karma Command Line Interface
 		Run > npm install -g karma-cli
-	7) Pull repository from bitbucket
-	8) Install Python. Use at least version 2.5.0 however 3.x.x versions will not work
+	6) Pull repository from bitbucket
+	7) Install Python. Use at least version 2.5.0 however 3.x.x versions will not work
 		http://www.python.org/getit/windows/
-	9) Install Microsoft Visual Studio Express 2013 for Windows Desktop with Update 4
+	8) Install Microsoft Visual Studio Express 2013 for Windows Desktop with Update 4
 		https://www.microsoft.com/en-us/download/confirmation.aspx?id=44914
-	10) Install node-gyp
+	9) Install node-gyp
 		1) Run > npm install -g node-gyp
-	11) In a node.js command prompt navigate to the repo
-	12) Run > npm install
-	13) Install Chrome extension postman REST client // This isn't necessary but it helps debug API endpoints.
+	10) In a node.js command prompt navigate to the repo
+	11) Run > npm install
+	12) Install Chrome extension postman REST client // This isn't necessary but it helps debug API endpoints.
 		https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en
 		
 ## Environment variables

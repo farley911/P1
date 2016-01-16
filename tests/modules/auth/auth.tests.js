@@ -1,7 +1,7 @@
 'use strict'
 
 describe('Auth Controller Tests', function () {
-  var $controller, $httpBackend, $scope, $state, $window, activateSpy, Auth, authFactory, checkAuthSpy, closeSpy, defer, initializeSpy, loginFactory, goSpy, loginSpy, logoutSpy, openLoginModalSpy, sessionStorageFactory, isLoggedInReqHandler;
+  var $controller, $httpBackend, $scope, $state, $window, activateSpy, Auth, authFactory, checkAuthSpy, closeSpy, defer, initializeSpy, coreFactory, goSpy, loginSpy, logoutSpy, openModalSpy, sessionStorageFactory, isLoggedInReqHandler;
 
   beforeEach(module('P1'));
   
@@ -19,7 +19,7 @@ describe('Auth Controller Tests', function () {
     loginSpy = jasmine.createSpy('login').and.returnValue(defer.promise);
     goSpy = jasmine.createSpy('go');
     logoutSpy = jasmine.createSpy('logout');
-    openLoginModalSpy = jasmine.createSpy('openLoginModal');
+    openModalSpy = jasmine.createSpy('openModal');
     initializeSpy = jasmine.createSpy('initialize');
 
     sessionStorageFactory = $injector.get('sessionStorageFactory');
@@ -42,16 +42,16 @@ describe('Auth Controller Tests', function () {
       go : goSpy
     };
 
-    // Define loginFactory
-    loginFactory = {
-      openLoginModal: openLoginModalSpy
+    // Define coreFactory
+    coreFactory = {
+      openModal: openModalSpy
     };
 
     // Init authFactory controller with mocked services
     Auth = $controller('Auth', {
       $scope: $scope,
       authFactory: authFactory,
-      loginFactory: loginFactory,
+      coreFactory: coreFactory,
       $state: $state
     });
 
@@ -83,7 +83,7 @@ describe('Auth Controller Tests', function () {
   describe('AuthCtrl.openLoginModal()', function () {
     it('should call openLoginModal()', function () {
       Auth.openLoginModal();
-      expect(loginFactory.openLoginModal).toHaveBeenCalled();
+      expect(coreFactory.openModal).toHaveBeenCalled();
     });
   });
 

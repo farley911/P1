@@ -10,11 +10,11 @@
       'P1.app'
     ])
     .config(function ($stateProvider, $locationProvider, $provide, $urlRouterProvider) {
-      var isUserLoggedIn = function($state, loginFactory, authFactory) {
+      var isUserLoggedIn = function($state, coreFactory, authFactory) {
         authFactory.checkAuth()
           .then(function() {
             if(!authFactory.isLoggedIn) {
-              return loginFactory.openLoginModal() // If the user isn't logged in display the login modal so they can log in.
+              return coreFactory.openLoginModal() // If the user isn't logged in display the login modal so they can log in.
                 .then(function() {
                   return $state.go($state.next.name, $state.toParams); // If they successfully log in send them to the page they requested.
                 }, function() {
