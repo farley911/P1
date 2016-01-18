@@ -5,9 +5,9 @@
     .module('P1.auth')
     .controller('Auth', Auth);
 
-  Auth.$inject = ['$scope', '$state', 'authFactory', 'coreFactory'];
+  Auth.$inject = ['$scope', '$state', '$stateParams', 'authFactory', 'coreFactory'];
 
-  function Auth($scope, $state, authFactory, coreFactory) {
+  function Auth($scope, $state, $stateParams, authFactory, coreFactory) {
     // Properties
     var auth = this;
     auth.factory = authFactory;
@@ -19,6 +19,7 @@
     auth.logout = logout;
     auth.openLoginModal = openLoginModal;
     auth.updatePassword = updatePassword;
+    authFactory.user.email = $stateParams.email;
 
     function login() {
       authFactory.login()

@@ -17,10 +17,10 @@
       isLoggedIn: false,
       scope: null,
       user: {
-        email: $stateParams.email,
-        username: '',
-        password: '',
-        c_password: ''
+        email: null,
+        username: null,
+        password: null,
+        c_password: null
       },
 
       // Methods
@@ -29,8 +29,7 @@
       forgotPassword: forgotPassword,
       login: login,
       logout: logout,
-      updatePassword: updatePassword,
-      watchEmailParam: watchEmailParam
+      updatePassword: updatePassword
     };
 
     return auth;
@@ -72,60 +71,24 @@
     }
 
     function forgotPassword(email) {
-      if(email) {
-        auth.forgotPasswordFeedback = '';
-        auth.forgotPasswordError = '';
-
-        $http.post('forgotPassword', { email: email })
-          .then(function (res) {
-            auth.forgotPasswordFeedback = res.data.message;
-          })
-          .catch(function (err) {
-            auth.forgotPasswordError = err.data.message;
-          })
-          .finally(function () {
-            coreFactory.openModal('modules/auth/views/forgotPassword.html', 'Auth', 'auth');
-          });
-      }
+      $http.post('forgotPassword', { email: email })
+        .then(function (res) {
+          auth.forgotPasswordFeedback = res.data.message;
+        })
+        .catch(function (err) {
+          auth.forgotPasswordError = err.data.message;
+        })
+        .finally(function () {
+          coreFactory.openModal('modules/auth/views/forgotPassword.html', 'Auth', 'auth');
+        });
     }
 
     function updatePassword() {
-      var defered = $q.defer();
-
-      $http.post('updatePassword', { email: auth.user.email, password: auth.user.password })
+      return $http.post('updatePassword', { email: auth.user.email, password: auth.user.password })
         .then(function(user) {
           auth.user = user.data;
-          auth.login()
-            .then(function() {
-              defered.resolve();
-            });
-        })
-        .catch(function (err) {
-          defered.reject(err);
+          return auth.login();
         });
-
-      return defered.promise;
-      // return $http.post('updatePassword', { email: auth.user.email, password: auth.user.password })
-      //   .then(function(user) {
-      //     auth.user = user.data;
-      //     auth.checkAuth()
-      //       .then(function() {
-      //         return;
-      //       });
-      //   })
-      //   .catch(function(err) {
-      //     console.log('err', err);
-      //   });
-    }
-
-    function watchEmailParam() {
-      auth.scope.$watch(function() {
-        return $stateParams.email
-      }, function (newVal, oldVal) {
-        if(oldVal !== newVal) {
-          auth.user.email = newVal;
-        }
-      });
     }
   }
 })();

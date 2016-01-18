@@ -16,7 +16,7 @@ describe('compareTo Directive Tests', function () {
     element = angular.element(
       '<form name="inputForm">' + 
         '<input name="input1" ng-model="inputModel.input1" />' +
-        '<input name="input2" ng-model="inputModel.input2" p1-compare-to="inputModel.input1" />' +
+        '<input name="input2" ng-model="inputModel.input2" compare-to="inputModel.input1" />' +
       '</form>'
     );
     $compile(element)($scope);
@@ -25,12 +25,12 @@ describe('compareTo Directive Tests', function () {
     isLoggedInReqHandler = $httpBackend.when('GET', 'isLoggedIn').respond(defer.promise);
   }));
 
-  describe('p1CompareTo()', function () {
-    it('should set $error.p1CompareTo to true if input1 and input2 dont match', function () {
+  describe('compareTo()', function () {
+    it('should set $error.compareTo to true if input1 and input2 dont match', function () {
       $scope.inputModel.input1 = 'foo';
       $scope.inputModel.input2 = 'bar';
       $scope.$digest();
-      expect(form.input2.$error.p1CompareTo).toEqual(true);
+      expect(form.input2.$error.compareTo).toEqual(true);
     });
 
     it('should have an empty $error object if input1 and input2 match', function () {

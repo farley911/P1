@@ -1,7 +1,7 @@
 'use strict'
 
 describe('Auth Factory Tests', function() {
-  var $httpBackend, $scope, authFactory, checkAuthSpy, closeSpy, defer, dismissSpy, getObjSpy, homeReqHandler, isLoggedInReqHandler, loginReqHandler, logOutReqHandler, removeSpy, closeModalSpy, openModalSpy, coreFactory, coreFactoryMock, sessionStorageFactory, sessionStorageFactoryMock, setObjSpy, user;
+  var $httpBackend, $scope, authFactory, checkAuthSpy, closeSpy, defer, dismissSpy, email, getObjSpy, homeReqHandler, forgotPasswordReqHandler, isLoggedInReqHandler, loginReqHandler, logOutReqHandler, removeSpy, closeModalSpy, openModalSpy, coreFactory, coreFactoryMock, sessionStorageFactory, sessionStorageFactoryMock, setObjSpy, user;
 
   beforeEach(module('P1'));
 
@@ -53,6 +53,7 @@ describe('Auth Factory Tests', function() {
     logOutReqHandler = $httpBackend.when('GET', 'logout').respond(defer.promise);
     isLoggedInReqHandler = $httpBackend.when('GET', 'isLoggedIn').respond(defer.promise);
     homeReqHandler = $httpBackend.when('GET', 'modules/home/home.html').respond({ body: '<html><body>Mock homepage</body></html>'});
+    forgotPasswordReqHandler = $httpBackend.when('POST', 'forgotPassword').respond(defer.promise);
     authFactory = $injector.get('authFactory');
     authFactory.scope = $scope;
     authFactory.scope.$close = closeSpy;
@@ -162,6 +163,57 @@ describe('Auth Factory Tests', function() {
       authFactory.checkAuth();
       $httpBackend.flush();
       expect(sessionStorageFactory.remove).toHaveBeenCalledWith('user');
+    });
+  });
+
+  describe('authFactory.forgotPassword()', function () {
+    beforeEach(function () {
+      email = 'bwayne@wayneenterprise.com';
+    });
+
+    it('should set authFactory.forgotPasswordFeedback to the value of res.data.message', function () {
+      $httpBackend.expectPOST('forgotPassword').respond({ message: 'foo bar baz' });
+      authFactory.forgotPassword(email);
+      $httpBackend.flush();
+      expect(authFactory.forgotPasswordFeedback).toEqual('foo bar baz');
+    });
+
+    it('should set authFactory.forgotPasswordError to the value of res.data.message when forgotPassword throws an error', function () {
+      $httpBackend.expectPOST('forgotPassword').respond(400, { message: 'foo bar baz' });
+      authFactory.forgotPassword(email);
+      $httpBackend.flush();
+      expect(authFactory.forgotPasswordError).toEqual('foo bar baz');
+    });
+  });
+
+  describe('authFactory.updatePassword', function () {
+    beforeEach(function () {
+      authFactory.user = {
+        email: 'bwayne@wayneenterprise.com',
+        password: 'password'
+      };
+    });
+
+    it('should authFactory.user to the value returned by /updatePassword', function () {
+      user = {
+        name: 'bruce wayne'
+      }
+      $httpBackend.expectPOST('updatePassword').respond(user);
+      authFactory.updatePassword();
+      $httpBackend.flush();
+      expect(authFactory.user).toEqual(user);
+    });
+
+    it('should call authFactory.login when updatePassword resolves', function () {    
+      authFactory.login = jasmine.createSpy('login').and.returnValue(defer.promise);
+      user = {
+        username: 'bwayne',
+        password: 'password123'
+      };
+      $httpBackend.expectPOST('updatePassword').respond(user);
+      authFactory.updatePassword();
+      $httpBackend.flush();
+      expect(authFactory.login).toHaveBeenCalled();
     });
   });
 });

@@ -1,7 +1,7 @@
 'use strict'
 
 describe('Auth Controller Tests', function () {
-  var $controller, $httpBackend, $scope, $state, $window, activateSpy, Auth, authFactory, checkAuthSpy, closeSpy, defer, initializeSpy, coreFactory, goSpy, loginSpy, logoutSpy, openModalSpy, sessionStorageFactory, isLoggedInReqHandler;
+  var $controller, $httpBackend, $scope, $state, $window, activateSpy, Auth, authFactory, checkAuthSpy, closeSpy, defer, initializeSpy, coreFactory, goSpy, forgotPasswordSpy, loginSpy, logoutSpy, openModalSpy, updatePasswordSpy, stateParamsMock, sessionStorageFactory, isLoggedInReqHandler;
 
   beforeEach(module('P1'));
   
@@ -16,10 +16,12 @@ describe('Auth Controller Tests', function () {
     activateSpy = jasmine.createSpy('activate');
     checkAuthSpy = jasmine.createSpy('checkAuth');
     closeSpy = jasmine.createSpy('$close');
+    forgotPasswordSpy = jasmine.createSpy('forgotPassword');
     loginSpy = jasmine.createSpy('login').and.returnValue(defer.promise);
     goSpy = jasmine.createSpy('go');
     logoutSpy = jasmine.createSpy('logout');
     openModalSpy = jasmine.createSpy('openModal');
+    updatePasswordSpy = jasmine.createSpy('updatePassword').and.returnValue(defer.promise);
     initializeSpy = jasmine.createSpy('initialize');
 
     sessionStorageFactory = $injector.get('sessionStorageFactory');
@@ -32,15 +34,27 @@ describe('Auth Controller Tests', function () {
     authFactory = {
       activate: activateSpy,
       checkAuth: checkAuthSpy,
+      forgotPassword: forgotPasswordSpy,
       initialize: initializeSpy,
       login: loginSpy,
       isLoggedIn: false,
       logout: logoutSpy,
+      updatePassword: updatePasswordSpy,
+      user: {
+        email: null,
+        username: null,
+        password: null,
+        c_password: null
+      }
     };
 
     $state = {
       go : goSpy
     };
+
+    stateParamsMock = {
+      email: 'bwayne@wayneenterprise.com'
+    }
 
     // Define coreFactory
     coreFactory = {
@@ -52,7 +66,8 @@ describe('Auth Controller Tests', function () {
       $scope: $scope,
       authFactory: authFactory,
       coreFactory: coreFactory,
-      $state: $state
+      $state: $state,
+      $stateParams: stateParamsMock
     });
 
     // digest to update controller with services and scope
@@ -96,6 +111,28 @@ describe('Auth Controller Tests', function () {
     it('should call $state.go("home")', function () {
       Auth.logout();
       expect($state.go).toHaveBeenCalledWith('home');
+    });
+  });
+
+  describe('AuthCtrl.forgotPassword()', function () {
+    it('should call authFactory.forgotPassword with email', function () {
+      var email = 'bwayne@wayneenterprise.com';
+      Auth.forgotPassword(email);
+      expect(authFactory.forgotPassword).toHaveBeenCalledWith(email);
+    });
+  });
+
+  describe('AuthCtrl.updatePassword()', function () {
+    it('should call authFactory.updatePassword', function () {
+      Auth.updatePassword();
+      expect(authFactory.updatePassword).toHaveBeenCalled();
+    });
+
+    it('should call $state.go with secure.user when updatePassword resolves', function() {
+      Auth.updatePassword();
+      defer.resolve({});
+      $scope.$digest();
+      expect($state.go).toHaveBeenCalledWith('secure.user');
     });
   });
 });

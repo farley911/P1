@@ -2,17 +2,17 @@
   'use strict';
 
   angular
-    .module('P1.p1CompareToDirective', [])
-    .directive('p1CompareTo', p1CompareTo);
+    .module('P1.compareToDirective', [])
+    .directive('compareTo', compareTo);
 
-  function p1CompareTo() {
+  function compareTo() {
     return {
       require: 'ngModel',
       scope: {
-        otherModelValue: '=p1CompareTo'
+        otherModelValue: '=compareTo'
       },
       link: function(scope, elem, attrs, ngModel) {
-        ngModel.$validators.p1CompareTo = function(modelValue) {
+        ngModel.$validators.compareTo = function(modelValue) {
           return modelValue == scope.otherModelValue;
         };
 
