@@ -1,5 +1,5 @@
-(function() {
-  'use strict'
+(function () {
+  'use strict';
 
   angular
     .module('P1.authFactory', [])    
@@ -7,7 +7,7 @@
 
   authFactory.$inject = ['$http', '$q', '$stateParams', 'coreFactory', 'sessionStorageFactory'];
 
-  function authFactory($http, $q, $stateParams, coreFactory, sessionStorageFactory){
+  function authFactory ($http, $q, $stateParams, coreFactory, sessionStorageFactory) {
     var auth = {
       // Properties
       errMsg: '',
@@ -24,7 +24,6 @@
       },
 
       // Methods
-      //activate: activate,
       checkAuth: checkAuth,
       forgotPassword: forgotPassword,
       login: login,
@@ -34,32 +33,31 @@
 
     return auth;
 
-    function login(){
+    function login () {
       return $http.post('login', auth.user)
-        .then(function(data){
+        .then(function () {
           auth.isLoggedIn = true;
           coreFactory.closeModal();
         })
-        .catch(function() {
+        .catch(function () {
           auth.hasErrMsg = true;
           auth.errMsg = 'Incorrect password.';
-          auth.$dismiss;
         });
     }
 
-    function logout(){
+    function logout () {
       $http.get('logout')
-        .then(function(){
+        .then(function () {
           auth.isLoggedIn = false;
           sessionStorageFactory.remove('user');
         });
     }
 
-    function checkAuth(){
+    function checkAuth () {
       var defered = $q.defer();
 
       $http.get('isLoggedIn')
-        .then(function(res) {
+        .then(function (res) {
           if(!res.data.isLoggedIn && sessionStorageFactory.getObj('user')) {
             sessionStorageFactory.remove('user');
           }
@@ -70,8 +68,10 @@
       return defered.promise;
     }
 
-    function forgotPassword(email) {
-      $http.post('forgotPassword', { email: email })
+    function forgotPassword (email) {
+      $http.post('forgotPassword', {
+          email: email
+        })
         .then(function (res) {
           auth.forgotPasswordFeedback = res.data.message;
         })
@@ -83,9 +83,12 @@
         });
     }
 
-    function updatePassword() {
-      return $http.post('updatePassword', { email: auth.user.email, password: auth.user.password })
-        .then(function(user) {
+    function updatePassword () {
+      return $http.post('updatePassword', {
+          email: auth.user.email, 
+          password: auth.user.password
+        })
+        .then(function (user) {
           auth.user = user.data;
           return auth.login();
         });

@@ -1,5 +1,5 @@
-(function() {
-  'use strict'
+(function () {
+  'use strict';
 
   angular
     .module('P1.sessionStorageFactory', [])    
@@ -7,34 +7,34 @@
 
   sessionStorageFactory.$inject = ['$window'];
 
-  function sessionStorageFactory($window) {
+  function sessionStorageFactory ($window) {
     var sessionStorageFactory = {
       set: set,
       get: get,
       setObj: setObj,
       getObj: getObj,
       remove: remove
-    }
+    };
 
     return sessionStorageFactory;
 
-    function set(key, value) {
+    function set (key, value) {
       $window.sessionStorage[key] = value;
     }
 
-    function get(key, defaultValue) {
+    function get (key, defaultValue) {
       return $window.sessionStorage[key] || defaultValue;
     }
 
-    function setObj(key, value) {
+    function setObj (key, value) {
       $window.sessionStorage[key] = JSON.stringify(value);
     }
 
-    function getObj(key) {
+    function getObj (key) {
       return $window.sessionStorage[key] ? JSON.parse($window.sessionStorage[key]) : null;
     }
 
-    function remove(key){
+    function remove (key) {
       $window.sessionStorage.removeItem(key);
       console.log('Session "' + key + '" has been removed.');
     }

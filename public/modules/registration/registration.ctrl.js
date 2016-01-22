@@ -1,5 +1,5 @@
-(function() {
-  'use strict'
+(function () {
+  'use strict';
 
   angular
     .module('P1.registration')
@@ -7,7 +7,7 @@
 
   Registration.$inject = ['$state', 'registrationFactory'];
 
-  function Registration($state, registrationFactory) {
+  function Registration ($state, registrationFactory) {
     // Properties
     var reg = this;
     reg.factory = registrationFactory;
@@ -17,19 +17,19 @@
     reg.checkUsername = checkUsername;
     reg.register = register;
 
-    function register() {
+    function register () {
       registrationFactory.register()
-        .then(function(){
+        .then(function () {
           $state.go('secure.user'); 
         });
-    };
+    }
 
-    function alreadyRegistered() {
+    function alreadyRegistered () {
       registrationFactory.doesUserExist();
-    };
+    }
 
-    function checkUsername() {
+    function checkUsername () {
       registrationFactory.checkUsername();
-    };
+    }
   }
 })();

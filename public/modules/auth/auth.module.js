@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -6,8 +6,8 @@
       'P1.authFactory',
       'P1.coreFactory'
     ])
-    .run(function($rootScope, authFactory) {
+    .run(function ($rootScope, authFactory) {
       authFactory.scope = $rootScope; // Provide scope to auth factory.
-	    authFactory.checkAuth(); // Check is the user is logged in.
+      authFactory.checkAuth(); // Check is the user is logged in.
     });
 })();

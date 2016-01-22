@@ -1,5 +1,5 @@
-(function() {
-  'use strict'
+(function () {
+  'use strict';
 
   angular
     .module('P1.registrationFactory', [])    
@@ -7,7 +7,7 @@
 
   registrationFactory.$inject = ['$http', 'authFactory'];
 
-  function registrationFactory($http, authFactory){
+  function registrationFactory ($http, authFactory) {
     var registration = {
       // Properties
       error: '',
@@ -25,30 +25,32 @@
       register: register,
       doesUserExist: doesUserExist,
       checkUsername: checkUsername,
-    }
+    };
 
     return registration;
 
 
-    function register(user){
+    function register (user) {
       return $http.post('register', registration.user)
-        .then(function(data){
+        .then(function (data) {
           /* istanbul ignore else*/
-          if(data.status === 200){
+          if(data.status === 200) {
             authFactory.isLoggedIn = true;
           }
         })
-        .catch(function(err) {
+        .catch(function (err) {
           registration.error = err.data;
         });
     }
 
-    function doesUserExist(){
+    function doesUserExist () {
       var email = registration.regForm.email;
       if(email.$valid) {
-        $http.post('doesUserExist', { email: registration.user.email })
-          .success(function(data){
-            if(data.message !== 'user exists'){
+        $http.post('doesUserExist', {
+            email: registration.user.email
+          })
+          .success(function (data) {
+            if(data.message !== 'user exists') {
               email.$setValidity('userExists', true); // Valid
             } else {
               email.$setValidity('userExists', false); // Not valid
@@ -59,11 +61,13 @@
       }
     }
 
-    function checkUsername() {
+    function checkUsername () {
       var username = registration.regForm.username;
       if(username.$valid) {
-        $http.post('checkUsername', { username: registration.user.username })
-          .success(function(data) {
+        $http.post('checkUsername', {
+            username: registration.user.username
+          })
+          .success(function (data) {
             if(data.message === 'username available') {
               username.$setValidity('usernameTaken', true); // username is available
             } else {

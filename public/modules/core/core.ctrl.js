@@ -1,5 +1,5 @@
-(function() {
-	'use strict'
+(function () {
+	'use strict';
 
 	angular
 		.module('P1.core')
@@ -7,7 +7,7 @@
 
 	Core.$inject = ['coreFactory'];
 
-	function Core(coreFactory) {
+	function Core (coreFactory) {
 		// Properties
 		var core = this;
 		core.factory = coreFactory;
