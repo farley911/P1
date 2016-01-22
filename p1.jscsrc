@@ -1,0 +1,10 @@
+{
+	"disallowMixedSpacesAndTabs": true,
+	"requirePaddingNewLinesInObjects": true,
+	"requireSpaceBeforeBlockStatements": 1,
+	"requireSpacesInFunction": {
+	    "beforeOpeningRoundBrace": true,
+	    "beforeOpeningCurlyBrace": true
+	},
+	"validateQuoteMarks": "'"	
+}
